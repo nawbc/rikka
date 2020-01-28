@@ -1,0 +1,38 @@
+.cf .cs {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  position: relative;
+  transition: transform 100ms ease-in;
+}
+
+.cf .cs:hover {
+  background-color: #1100ff5d;
+  color: #000;
+}
+
+.cf .cs:active {
+  transform: translateY(2px);
+}
+
+.cf .cs.selected {
+  background-color: #372cda9f;
+}
+
+.cf .oc {
+  position: relative;
+  border-top: 1px solid #d4d4d4;
+  background-color: #fff;
+}
+
+.cf .oc .f {
+  width: 100%;
+  justify-content: space-around;
+  display: flex;
+  margin-top: 10px;
+}
+
+.cf .ct {
+  padding: 10px 0;
+}

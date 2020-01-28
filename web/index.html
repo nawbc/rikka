@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcuts icon" href="./favicon.ico">
+  <link rel="icon" href="./favicon.ico">
+  <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+  <title>邪王真眼最强 -- 跨平台动漫客户端</title>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      user-select: none;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    .above {
+      width: 100%;
+      height: 70vh;
+      background-color: #31459a;
+      position: relative;
+    }
+
+    .above img {
+      width: 70px;
+      height: 70px;
+      box-shadow: 0 0 10px rgba(0, 68, 255, 0.2), inset 0 0 10px rgba(0, 68, 255, 0.2), 0 5px 0 rgba(0, 68, 255, 0.2);
+      border: #002cf1;
+      border-radius: 100%;
+      position: relative;
+      top: 20px;
+      left: 2em;
+    }
+
+    .title {
+      color: #fff;
+      list-style: none;
+      margin-top: 100px;
+    }
+
+    .i {
+      font-weight: bolder;
+    }
+
+    .a {
+      font-size: 70px;
+    }
+
+    .b {
+      font-size: 60px;
+      display: inline-block;
+      transform: rotate(-20deg);
+    }
+
+    .c {
+      font-size: 45px;
+      margin-left: 10px;
+    }
+
+    .above h3 {
+      text-indent: 30px;
+    }
+
+    .below {
+      width: 100%;
+      height: 30vh;
+      position: relative;
+    }
+
+    .below img {
+      position: absolute;
+      width: 65vw;
+      height: auto;
+    }
+
+    .below img:nth-child(1) {
+      right: -20vw;
+      bottom: -15vh;
+      z-index: 1;
+    }
+
+    .below img:nth-child(1):hover {}
+
+    .below img:nth-child(2) {
+      right: -13vw;
+      bottom: -26vh;
+    }
+
+    button {
+      border: none;
+      outline: none;
+    }
+
+    #download {
+      padding: 0 20px;
+      height: 60px;
+      font-size: 18px;
+      background-color: #5168ce;
+      color: rgb(255, 255, 255);
+      position: absolute;
+      bottom: 0px;
+      margin-bottom: -30px;
+      margin-left: 200px;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      will-change: transform;
+      box-shadow: -20px 15px 0px rgba(85, 104, 189, 0.541);
+      z-index: 10;
+    }
+
+    #download:hover {
+      box-shadow: -10px 5px 0px rgba(85, 104, 189, 0.541);
+    }
+
+    #download:active {
+      transform: translateY(10px);
+    }
+
+    .btn {
+      width: 100px;
+      height: 45px;
+      background-color: #5168ce;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      will-change: transform;
+      box-shadow: -20px 15px 0px rgba(85, 104, 189, 0.541);
+      color: rgb(255, 255, 255);
+      margin: 20px 0px;
+    }
+
+    .btn:active {
+      transform: translateY(10px);
+    }
+
+    .btn:hover {
+      box-shadow: -10px 5px 0px rgba(85, 104, 189, 0.541);
+    }
+
+    .btn:nth-child(1) {
+      background-color: #2ed386;
+      box-shadow: -20px 15px 0px rgba(61, 218, 131, 0.541);
+    }
+
+    .btn:nth-child(1):hover {
+      box-shadow: -10px 5px 0px rgba(61, 218, 131, 0.541);
+    }
+
+    .btn:nth-child(2) {
+      background-color: #eb34b4;
+      box-shadow: -20px 15px 0px rgba(216, 81, 193, 0.541);
+    }
+
+    .btn:nth-child(2):hover {
+      box-shadow: -10px 5px 0px rgba(216, 81, 193, 0.541);
+    }
+
+    .btn:nth-child(3) {
+      background-color: #e2374e;
+      box-shadow: -20px 15px 0px rgba(218, 61, 140, 0.541);
+    }
+
+    .btn:nth-child(3):hover {
+      box-shadow: -10px 5px 0px rgba(218, 61, 140, 0.541);
+    }
+
+    #platform {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      left: 0;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      z-index: 1000;
+      transform: translateY(-400px);
+      transition: transform 200ms ease;
+      will-change: transform;
+    }
+
+    @media only screen and (max-width: 720px) {
+      .above {
+        height: 50vh;
+      }
+
+      .a {
+        font-size: 50px;
+        transform: translateY(-20px);
+      }
+
+      .c {
+        font-size: 30px;
+        margin: 0;
+        display: block;
+      }
+
+      .b {
+        font-size: 40px;
+      }
+
+      .below {
+        height: 50vh;
+        overflow: hidden;
+      }
+
+      .below img {
+        position: absolute;
+        width: 100vw;
+        height: auto;
+        bottom: unset;
+      }
+
+      .below img:nth-child(1) {
+        z-index: 1;
+        top: 80px;
+      }
+
+      .below img:nth-child(2) {
+        top: 120px;
+        right: -10vw;
+      }
+
+      #download {
+        right: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="above">
+    <img src="./icon.svg" alt="logo">
+    <ul class="title">
+      <li class="i a">邪王真眼</li>
+      <li class="i b">最强</li>
+      <span class="i c">跨平台动漫客户端</span>
+    </ul>
+    <button id="download">客户端下载 v0.1</button>
+  </div>
+  <div class="below">
+    <img src="./20191226160251.png" alt="screen">
+    <img src="./20191226161704.png" alt="screen1">
+  </div>
+  <div>
+    <div id="platform">
+      <button class="btn">window</button>
+      <button class="btn">linux</button style="position: unset;">
+      <button class="btn">mac os</button>
+      <button class="btn" id="shadow">关闭</button>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var d = document.getElementById('download'),
+      s = document.getElementById('shadow'),
+      p = document.getElementById('platform');
+    d.onclick = function () {
+      p.style.transform = 'translateY(0px)';
+    }
+
+    s.onclick = function () {
+      p.style.transform = 'translateY(-400px)';
+    }
+  </script>
+</body>
+
+</html>

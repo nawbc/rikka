@@ -1,0 +1,18 @@
+@import '~antd/dist/antd.css';
+@import '~dplayer/dist/DPlayer.min.css';
+@import 'customAntdTheme.css';
+@import 'item.css';
+
+body {
+  user-select: none;
+  overflow: hidden;
+}
+
+:root {
+  --violet_dark: #222244;
+  --violet_light: #2d2b55;
+  --violet_a: #7457ff;
+  --violet_s1: #7457ff;
+  --violet_s2: #7457ff;
+  --violet_s3: #7457ff;
+}

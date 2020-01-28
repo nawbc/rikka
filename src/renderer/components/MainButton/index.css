@@ -1,0 +1,167 @@
+/* code form https://codepen.io/nourabusoud/pen/ypZzMM */
+
+.bubbly-button {
+  /* position: fixed; */
+  display: inline-block;
+  -webkit-appearance: none;
+  backdrop-filter: saturate(180%) blur(20px);
+  appearance: none;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  /* border-radius: 100%; */
+  z-index: 2000;
+}
+
+.bubbly-button:focus {
+  outline: 0;
+}
+
+.bubbly-button:before,
+.bubbly-button:after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -12%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-size: 25% 25%, 35% 35%, 30% 30%, 35% 35%, 33% 33%, 25% 25%, 30% 30%,
+    25% 25%, 33% 33%;
+}
+
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-size: 25% 25%, 35% 35%, 30% 30%, 35% 35%, 33% 33%, 25% 25%, 30% 30%,
+    25% 25%, 33% 33%;
+}
+
+.bubbly-button:active {
+  transform: scale(0.9);
+}
+
+.bubbly-button.animate:before {
+  display: block;
+  animation: topBubbles ease-in-out 650ms forwards;
+}
+
+.bubbly-button.animate:after {
+  display: block;
+  animation: bottomBubbles ease-in-out 650ms forwards;
+}
+
+@keyframes topBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+      40% 90%, 55% 90%, 70% 90%;
+  }
+
+  50% {
+    background-position: 0% 40%, 0% 10%, 10% 20%, 20% 0%, 30% 30%, 22% 50%,
+      50% 50%, 65% 20%, 90% 30%;
+  }
+
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+      50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+@keyframes bottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+      70% -10%, 70% 0%;
+  }
+
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+      105% 0%;
+  }
+
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+      110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+.home-button {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  background-color: #3125d8de;
+  box-shadow: 1px 1px 8px #847cfdd9;
+}
+
+.home-button::before {
+  background-image: radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #3d30f0 20%, transparent 30%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #3d30f0 15%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%);
+}
+
+.home-button::after {
+  background-image: radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #3d30f0 15%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%),
+    radial-gradient(circle, #3d30f0 20%, transparent 20%);
+}
+
+.home-button:active {
+  background-color: #2718ee;
+  box-shadow: 0 2px 25px #7c74fb;
+}
+
+.search-button {
+  position: relative;
+  width: 34px;
+  margin-right: 5px;
+  height: 34px;
+  background-color: #000000db;
+  box-shadow: 1px 1px 8px #5c5c5cd9;
+}
+
+.search-button::before {
+  background-image: radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #5c5c5cd9 20%, transparent 30%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #5c5c5cd9 15%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%);
+}
+
+.search-button::after {
+  background-image: radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #5c5c5cd9 15%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%);
+}
+
+.search-button:active {
+  background-color: #000;
+  box-shadow: 0 2px 25px #5c5c5cd9;
+}

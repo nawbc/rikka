@@ -1,0 +1,20 @@
+li {
+  list-style: none;
+}
+
+.nav .ant-col.ant-col-6 {
+  margin-bottom: 4px;
+}
+
+.nav * {
+  color: #242424;
+}
+
+a {
+  position: relative;
+  color: #000;
+}
+
+a:hover {
+  color: rgba(0, 0, 0, 0.74);
+}

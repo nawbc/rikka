@@ -1,0 +1,12 @@
+.button-down {
+  position: relative;
+  transition: transform 100ms ease-in;
+  display: inline-block;
+}
+
+.button-down:hover {
+}
+
+.button-down:active {
+  transform: translateY(4px);
+}

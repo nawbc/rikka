@@ -1,0 +1,4 @@
+src/renderer/tmp
+node_modules
+dist
+build
