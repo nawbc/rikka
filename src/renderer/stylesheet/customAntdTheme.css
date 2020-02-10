@@ -7,7 +7,6 @@
 /* 对话框 */
 .ant-modal-content {
   border-radius: 0px;
-  background: #1e29807a;
 }
 
 .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
@@ -113,10 +112,6 @@
   border-radius: 0px;
 }
 
-/* .ant-input::-webkit-input-placeholder {
-  color: #464646;
-} */
-
 .ant-input::input-placeholder {
   color: #464646;
 }
@@ -167,7 +162,7 @@
 }
 
 /* nav  scroll */
-.ant-tabs-bar {
+/* .ant-tabs-bar {
   border: unset;
   margin: unset;
 }
@@ -198,7 +193,7 @@
   z-index: 999;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.226);
-}
+} */
 
 .ant-modal-mask {
   backdrop-filter: blur(10px);
@@ -277,10 +272,10 @@
 }
 
 .ant-select-auto-complete.ant-select .ant-input {
-  height: 40px;
+  height: 34px;
   font-size: 16px;
   border-width: 0px;
-  border-bottom: 2px solid #000;
+  background-color: #d9d9d9;
   border-radius: 0px;
 }
 
@@ -288,15 +283,6 @@
 .ant-select-auto-complete.ant-select .ant-input:hover {
   border-color: unset;
   border-right-width: 0px !important;
-}
-
-.search-box .ant-input {
-  padding: 0;
-}
-
-.search-box .ant-select-auto-complete {
-  transition: width 300ms ease;
-  will-change: width;
 }
 
 .ant-select-dropdown {

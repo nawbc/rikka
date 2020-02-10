@@ -1,9 +1,12 @@
-import React, { FC, useEffect, useState, useMemo } from 'react';
+import React, { FC, useEffect, useState, useMemo, useContext } from 'react';
 import { Player, CollectionBlock } from '@/components';
 import { VideoApi, VideoSrcApi } from '@/api/halihali/videoApi';
-import { useTitle } from '@/utils';
+import { useTitle, useWindowResize } from '@/utils';
 import { halihaliUrl, createIntroduce } from '@/api/halihali';
 import { format } from 'url';
+import log from 'electron-log';
+import { notification } from 'antd';
+import { ctx } from '@/App';
 
 const initVideo = {
   currentVideo: {
@@ -28,18 +31,19 @@ const initVideo = {
 };
 
 const Play: FC<any> = function(props) {
-  // const { id, type } = props.match.params;
   const [src, setSrc] = useState<VideoSrcApi>(initVideo);
   const [collection, selectCollection] = useState(0);
   const [origin, setOrigin] = useState(1);
-  const id = 6616,
-    type = 'acg';
+  const [intro, setIntro] = useState();
+  const { height } = useWindowResize();
+  const { id, type, name } = props.match.params;
   const introUrl = format({
     host: halihaliUrl,
-    pathname: `${type}/${id}/`
+    pathname: `/${type}/${id}/`
   });
 
-  useTitle('勇者很强');
+  useTitle(name);
+
   const currentVideo = useMemo(async () => {
     return new VideoApi(introUrl + '1.html', type).init();
   }, [type]);
@@ -48,33 +52,54 @@ const Play: FC<any> = function(props) {
     return createIntroduce(introUrl);
   }, [introUrl]);
 
-  // useEffect(() => {
-  //   currentVideo
-  //     .then(e => e.index(collection))
-  //     .then(e => e.origin(origin))
-  //     .then(data => {
-  //       console.log(data);
-  //       setSrc(data);
-  //     })
-  //     .catch(err => {
-  //       console.log(11, err);
-  //     });
-  // }, [collection, src]);
+  useEffect(() => {
+    currentVideo
+      .then(e => e.index(collection))
+      .then(e => e.origin(origin))
+      .then(data => {
+        console.log(data);
+        setSrc(data);
+      })
+      .catch(err => {
+        notification.open({
+          message: '',
+          description: '视频获取错误'
+        });
+        log.error(err);
+      });
+    introduce
+      .then(data => {
+        setIntro(data);
+      })
+      .catch(err => {
+        notification.open({
+          message: '',
+          description: '视频信息获取错误'
+        });
+        log.error(err);
+        setIntro('error');
+      });
+  }, [collection, src]);
 
   return (
-    <>
+    <div
+      style={{
+        height: height - 20,
+        position: 'relative'
+      }}
+    >
       <Player src={src} />
       <CollectionBlock
         onSetOrigin={num => {
           setOrigin(num);
         }}
         src={src}
-        intro={introduce}
+        intro={intro}
         onSelectCollection={num => {
           selectCollection(num);
         }}
       />
-    </>
+    </div>
   );
 };
 

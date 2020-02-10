@@ -10,6 +10,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const htmlPluginCommon = {
+  minify: {
+    collapseWhitespace: true,
+    removeAttributeQuotes: true,
+    removeComments: true
+  },
+  nodeModules: false
+};
 
 // TODO update
 let webConfig = {
@@ -84,13 +92,21 @@ let webConfig = {
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, '../src/index.ejs'),
-      minify: {
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true
-      },
-      nodeModules: false
+      template: path.resolve(__dirname, '../src/templates/index.ejs'),
+      chunks: ['renderer'],
+      ...htmlPluginCommon
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'searchResult.html',
+      template: path.resolve(__dirname, '../src/templates/searchResult.ejs'),
+      chunks: ['searchResult'],
+      ...htmlPluginCommon
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'play.html',
+      template: path.resolve(__dirname, '../src/templates/play.ejs'),
+      chunks: ['play'],
+      ...htmlPluginCommon
     }),
     new webpack.DefinePlugin({
       'process.env.IS_WEB': 'true'

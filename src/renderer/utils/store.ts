@@ -7,6 +7,14 @@ const schema: any = {
   setting: {
     type: 'object',
     properties: {
+      themeMode: {
+        type: 'string',
+        default: 'light'
+      },
+      dayNightMode: {
+        type: 'boolean',
+        default: true
+      },
       splash: {
         type: 'boolean',
         default: true

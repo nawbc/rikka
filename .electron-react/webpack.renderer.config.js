@@ -11,15 +11,29 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const pkg = require('../package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isNotProd = process.env.NODE_ENV !== 'production';
 const rendererPath = path.resolve('src/renderer');
+const htmlPluginCommon = {
+  minify: {
+    removeRedundantAttributes: true, // 删除多余的属性
+    collapseWhitespace: true, // 折叠空白区域
+    removeAttributeQuotes: true, // 移除属性的引号
+    removeComments: true, // 移除注释
+    collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
+  },
+  nodeModules: isNotProd ? path.resolve(__dirname, '../node_modules') : false
+};
 
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
-    renderer: path.join(__dirname, '../src/renderer/index.tsx')
+    renderer: path.join(__dirname, '../src/renderer/index.tsx'),
+    searchResult: path.join(__dirname, '../src/renderer/screen/SearchResult/index.tsx'),
+    play: path.join(__dirname, '../src/renderer/screen/Play/index.tsx')
+    // vendor: Object.keys(pkg.dependencies)
   },
   // externals: [
   //   ...Object.keys(dependencies || {}).filter(
@@ -98,15 +112,21 @@ let rendererConfig = {
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, '../src/index.ejs'),
-      minify: {
-        removeRedundantAttributes: true, // 删除多余的属性
-        collapseWhitespace: true, // 折叠空白区域
-        removeAttributeQuotes: true, // 移除属性的引号
-        removeComments: true, // 移除注释
-        collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
-      },
-      nodeModules: isNotProd ? path.resolve(__dirname, '../node_modules') : false
+      template: path.resolve(__dirname, '../src/templates/index.ejs'),
+      chunks: ['renderer'],
+      ...htmlPluginCommon
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'searchResult.html',
+      template: path.resolve(__dirname, '../src/templates/searchResult.ejs'),
+      chunks: ['searchResult'],
+      ...htmlPluginCommon
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'play.html',
+      template: path.resolve(__dirname, '../src/templates/play.ejs'),
+      chunks: ['play'],
+      ...htmlPluginCommon
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
@@ -144,11 +164,33 @@ if (isProd) {
   rendererConfig.devtool = '';
   rendererConfig.optimization = {
     minimize: true,
-    minimizer: [new TerserPlugin({ extractComments: false }), new OptimizeCSSAssetsPlugin({})]
+    minimizer: [new TerserPlugin({ extractComments: false }), new OptimizeCSSAssetsPlugin({})],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          // node_modules  都提取到vendor
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          priority: 10,
+          enforce: true
+        },
+        common: {
+          // 包含了 entry 中共有的代码
+          name: 'common',
+          minChunks: 2,
+          minSize: 30000
+        }
+      },
+      chunks: 'all',
+      minSize: 40000
+    }
   };
 
   rendererConfig.plugins.push(
-    new MiniCssExtractPlugin({ filename: 'styles.css' }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new CopyWebpackPlugin([
       {
         from: path.join(__dirname, '../static'),

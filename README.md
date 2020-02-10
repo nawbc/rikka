@@ -1,6 +1,9 @@
-# 邪王真眼最强 --  跨平台看番客户端
+# 邪王真眼最强 -- 跨平台看番客户端
 
-``` bash
+66296E
+B06AB1
+
+```bash
 # install dependencies
 npm install
 

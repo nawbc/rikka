@@ -1,94 +1,107 @@
-import React, { FC, useState } from "react";
-import MainButton from "../MainButton";
-import { AutoComplete } from "antd";
-import { RIcon } from "..";
-import "./index.css";
+import React, { FC, useState, useRef } from 'react';
+import MainButton from '../MainButton';
+import { AutoComplete } from 'antd';
+import { RIcon } from '..';
+import './index.css';
+import { createSearch } from '@/api/halihali';
+import { SearchListData } from '@/api/halihali/halihali.interface';
+import { createChildWindow } from '@/utils';
+import { remote, ipcRenderer } from 'electron';
+const { Option } = AutoComplete as any;
 
-const { Option } = AutoComplete;
-
-function getRandomInt(max: any, min = 0) {
-  return Math.floor(Math.random() * (max - min + 1)) + min; // eslint-disable-line no-mixed-operators
-}
-function searchResult(query: any) {
-  return new Array(getRandomInt(5))
-    .join(".")
-    .split(".")
-    .map((item, idx) => ({
-      query,
-      category: `${query}${idx}`,
-      count: getRandomInt(200, 100)
-    }));
-}
-
-function renderOption(item: any) {
-  return (
-    <Option key={item.category}>
-      <div className="global-search-item">
-        <span className="global-search-item-desc">
-          {item.query}
-          <a
-            href={`https://s.taobao.com/search?q=${item.query}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {item.category}
-          </a>
+const dataToEleList = (data: SearchListData[]) =>
+  data.map((item, index) => (
+    <Option key={index} text={item.title}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span
+          style={{
+            width: '90%',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }}
+        >
+          {item.title}
         </span>
-        <span className="global-search-item-count">{item.count} results</span>
+        <RIcon size={[16, 16]} src={require('../../assets/play.svg')} />
       </div>
     </Option>
-  );
-}
+  ));
 
 const Search: FC<any> = function(props) {
-  // const { size, src, style } = props;
-  const [width, setWidth] = useState("0px");
-  const [dataSource, setDataSource] = useState<any[]>([]);
-  const [focus, setFocus] = useState(false);
+  const [width, setWidth] = useState('0px');
+  const [dataSource, setDataSource] = useState<SearchListData[]>([]);
+  const [display, setMaskDisplay] = useState(false);
+  const [searchTarget, setSearchTarget] = useState('');
 
   return (
-    <div
-      className="search-box"
-      style={{
-        position: "fixed",
-        bottom: "25px",
-        right: "85px",
-        display: "inline-flex",
-        alignItems: "flex-end"
-      }}
-    >
-      <MainButton
-        className="search-button"
-        onClick={(button: HTMLButtonElement) => {
-          setWidth("160px");
-          setFocus(true);
-        }}
-      >
-        <RIcon
-          src={require("../../assets/search.svg")}
-          size={[18, 18]}
-          style={{
-            transform: "translate(0px, 2px)"
+    <>
+      {display ? (
+        <div
+          className="full-box"
+          onClick={() => {
+            setMaskDisplay(false);
+            setWidth('0px');
           }}
         />
-      </MainButton>
-      <AutoComplete
-        dataSource={dataSource.map(renderOption)}
-        style={{ height: "40px", width }}
-        onSearch={value => {
-          setDataSource(value ? searchResult(value) : []);
+      ) : null}
+      <div
+        className="search-box"
+        style={{
+          position: 'fixed',
+          bottom: 25,
+          right: 85,
+          display: 'inline-flex',
+          alignItems: 'flex-end'
         }}
-        autoFocus={focus}
       >
-        <input
-          className="ant-input ant-select-search__field"
-          placeholder="不可视境界线"
-          onBlur={() => {
-            setWidth("0px");
+        <MainButton
+          className="search-button"
+          onClick={() => {
+            setMaskDisplay(true);
+            setWidth('200px');
+            if (width === '200px') {
+              const resultWindow = createChildWindow('searchResult.html', {
+                width: 600,
+                height: 600
+              });
+              resultWindow.webContents.on('did-finish-load', () => {
+                ipcRenderer.sendTo(resultWindow.webContents.id, 'message', dataSource);
+              });
+            }
           }}
-        />
-      </AutoComplete>
-    </div>
+        >
+          <RIcon
+            src={require('../../assets/search.svg')}
+            size={[18, 18]}
+            style={{
+              transform: 'translate(0px, 2px)'
+            }}
+          />
+        </MainButton>
+        <AutoComplete
+          dataSource={dataToEleList(dataSource)}
+          style={{ height: 34, width }}
+          optionLabelProp="text"
+          // onSelect={v => {
+          //   setSearchTarget(v);
+          // }}
+          onSearch={value => {
+            createSearch(value).then(data => {
+              setDataSource(!!data && data.length > 0 ? data : []);
+            });
+          }}
+          dropdownMenuStyle={{
+            maxHeight: 400
+          }}
+        >
+          <input
+            style={{ textIndent: 10 }}
+            className="ant-input ant-select-search__field"
+            placeholder="不可视境界线"
+          />
+        </AutoComplete>
+      </div>
+    </>
   );
 };
 

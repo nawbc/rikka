@@ -1,13 +1,13 @@
-import * as React from "react";
-import { createPortal } from "react-dom";
-import { ScrollBar } from "..";
+import * as React from 'react';
+import { createPortal } from 'react-dom';
+import { ScrollBar } from '..';
 
 export class CollectionList extends React.Component<any, any> {
   collectionList: HTMLDivElement;
 
   constructor(props: any) {
     super(props);
-    this.collectionList = document.createElement("div") as HTMLDivElement;
+    this.collectionList = document.createElement('div') as HTMLDivElement;
   }
 
   componentDidMount() {
@@ -19,7 +19,7 @@ export class CollectionList extends React.Component<any, any> {
   }
 
   private insertList = () => {
-    const wrapper = document.getElementById("player") as HTMLDivElement;
+    const wrapper = document.getElementById('player') as HTMLDivElement;
     setTimeout(() => {
       wrapper.appendChild(this.collectionList);
     }, 500);
@@ -31,17 +31,17 @@ export class CollectionList extends React.Component<any, any> {
       <>
         {display ? (
           <div
-            className="collection-mask"
+            className="collection-mask full-box"
             onClick={() => {
               close();
             }}
           />
         ) : null}
-        <div className={`collection-list ${display ? "show" : "hide"}`}>
+        <div className={`collection-list ${display ? 'show' : 'hide'}`}>
           <ScrollBar
             style={{
-              width: "100%",
-              height: "100%"
+              width: '100%',
+              height: '100%'
             }}
           >
             {children}

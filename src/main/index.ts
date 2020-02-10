@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, Tray /* ipcMain as ipc */ } from 'electron';
+import { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage, remote } from 'electron';
 import { resolve } from 'path';
 
 /**
@@ -13,11 +13,10 @@ if (process.env.NODE_ENV !== 'development') {
 
 let mainWindow: BrowserWindow | null;
 let tray: Tray;
-const platform = process.platform;
 
 const winURL =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:9080'
+    ? 'http://localhost:9080/index.html'
     : `file://${__dirname}/index.html`;
 
 function createWindow() {
@@ -31,10 +30,27 @@ function createWindow() {
       webSecurity: false
     }
   });
+
   Menu.setApplicationMenu(null);
 
   mainWindow.loadURL(winURL);
   mainWindow.setMinimumSize(1000, 636);
+
+  ipcMain.on('min', () => {
+    mainWindow!.minimize();
+  });
+
+  ipcMain.on('max', () => {
+    mainWindow!.maximize();
+  });
+
+  ipcMain.on('close', () => {
+    mainWindow!.close();
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 
   mainWindow.on('close', (event: any) => {
     mainWindow!.hide();
@@ -43,14 +59,9 @@ function createWindow() {
     event.preventDefault();
   });
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  const iconSuffix =
-    platform === 'win32' ? 'icon.ico' : platform === 'linux' ? '512x512.png' : 'icon.icns';
-  const iconPath = resolve(__dirname, '../../build/icons/' + iconSuffix);
-  tray = new Tray(iconPath);
+  const iconPath = resolve(__dirname, '../../static/icons/tray.png');
+  const icon = nativeImage.createFromPath(iconPath);
+  tray = new Tray(icon);
   const contextMenu = Menu.buildFromTemplate([
     {
       label: '显示',
@@ -98,6 +109,7 @@ app.on('activate', () => {
  */
 
 import { autoUpdater } from 'electron-updater';
+
 autoUpdater.on('update-downloaded', () => {
   autoUpdater.quitAndInstall();
 });

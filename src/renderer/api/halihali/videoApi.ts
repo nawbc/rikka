@@ -115,9 +115,13 @@ export class VideoApi {
       }).then(data => {
         if (/playarr_1/.test(data)) {
           tokenTarget.yb_url1 = this.exact_plays(data, 'playarr_1');
-        } else if (/playarr_2/.test(data)) {
+        }
+
+        if (/playarr_2/.test(data)) {
           tokenTarget.yb_url2 = this.exact_plays(data, 'playarr_2');
-        } else {
+        }
+
+        if (/playarr_2/.test(data)) {
           tokenTarget.vid = this.exact_plays(data, 'playarr');
         }
       });
@@ -132,6 +136,7 @@ export class VideoApi {
       tokenTarget.yb_url1.length,
       tokenTarget.yb_url2.length
     );
+
     for (let i = 0; i < max; i++) {
       !!!tokenTarget.vid![i] && (tokenTarget.vid[i] = ['', '', '']);
       !!!tokenTarget.yb_url1![i] && (tokenTarget.yb_url1[i] = ['', '', '']);
@@ -250,25 +255,30 @@ export class VideoApi {
 
   public async index(i: number): Promise<this> {
     const { vid, yb_url1, yb_url2 } = this.collections;
-    const select = {
-      vid: vid![i]![0],
-      yb_url1: yb_url2![i]![0],
-      yb_url2: yb_url1![i]![0],
-      m: vid![i]![1]
-    };
 
-    this.videoMakeUp = select;
-    this.id = i;
+    try {
+      const select = {
+        vid: vid![i]![0],
+        yb_url1: yb_url2![i]![0],
+        yb_url2: yb_url1![i]![0],
+        m: vid![i]![1]
+      };
+
+      this.videoMakeUp = select;
+      this.id = i;
+    } catch (err) {
+      throw new Error('视频出错:' + err);
+    }
     // this.videoMakeUp.url = await this.compose_dpcomp(select);
     // this.origins_info = await this.get_origins(this.videoMakeUp.url);
     return this;
   }
 
-  public async intro(url: string): Promise<this> {
-    const data = await get(url, { headers });
-    this.introduce = transformIntroduce(data);
-    return this;
-  }
+  // public async intro(url: string): Promise<this> {
+  //   const data = await get(url, { headers });
+  //   this.introduce = transformIntroduce(data);
+  //   return this;
+  // }
 
   public async origin(o = 1): Promise<any> {
     switch (o) {

@@ -8,7 +8,7 @@ export const useWindowResize = function() {
   const [size, setReSize] = useState(getSize());
   useEffect(() => {
     window.onresize = () => setReSize(getSize());
-  }, []);
+  });
   return size;
 };
 
@@ -41,7 +41,7 @@ export const useNetWork = function(): NetWork {
 
 export const useTitle = function(t: string): void {
   useEffect(() => {
-    window.document.title = t;
+    document.getElementById('app-title')!.innerText = t;
   }, [t]);
 };
 

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 const Movie: FC = function() {
   return <div>Movie</div>;

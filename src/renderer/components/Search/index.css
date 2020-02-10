@@ -1,4 +1,4 @@
-.global-search-wrapper {
+/* .global-search-wrapper {
   padding-right: 50px;
 }
 
@@ -31,4 +31,53 @@
 
 .global-search-item-count {
   flex: none;
+} */
+
+.search-button {
+  position: relative;
+  width: 34px;
+  margin-right: 5px;
+  height: 34px;
+  background-color: #000000db;
+  box-shadow: 1px 1px 8px #5c5c5cd9;
+}
+
+.search-button::before {
+  background-image: radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #5c5c5cd9 20%, transparent 30%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #5c5c5cd9 15%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%);
+}
+
+.search-button::after {
+  background-image: radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #5c5c5cd9 15%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%),
+    radial-gradient(circle, #5c5c5cd9 20%, transparent 20%);
+}
+
+.search-button:active {
+  background-color: #000;
+  box-shadow: 0 2px 25px #5c5c5cd9;
+}
+
+.search-box .ant-input {
+  padding: 0;
+}
+
+.search-box .ant-select-auto-complete {
+  transition: width 300ms ease;
+  will-change: width;
+}
+
+.ant-select-dropdown-menu::-webkit-scrollbar {
+  display: none;
 }

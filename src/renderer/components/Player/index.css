@@ -8,7 +8,7 @@
   transform: translateY(1px);
 }
 
-.play-sm-1>* {
+.play-sm-1 > * {
   font-weight: bold;
   padding: 8.5px;
   display: inline-flex;
@@ -39,12 +39,11 @@
 .collection-list {
   width: 20vw;
   height: 100%;
-  /* backdrop-filter: blur(20px); */
   background: #ffffff96;
   position: absolute;
   right: -20vw;
   top: 0;
-  transition: transform 400ms ease;
+  transition: transform 300ms ease;
   will-change: transform;
   z-index: 997;
   font-size: 16px;
@@ -59,13 +58,8 @@
 }
 
 .collection-mask {
-  z-index: 996;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  backdrop-filter: blur(20px);
+  z-index: 900;
+  backdrop-filter: blur(5px);
   background: #0000003a;
 }
 

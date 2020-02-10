@@ -15,9 +15,8 @@ interface Collection {
 }
 
 const CollectionBlock: FC<Collection> = function(props) {
-  const { src, onSelectCollection } = props;
-  const { collections, introduce } = src;
-  console.log(11111);
+  const { src, intro, onSelectCollection } = props;
+  const { collections } = src;
   return (
     <div
       style={{

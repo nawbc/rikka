@@ -1,4 +1,4 @@
-import React, { FC, useState, useLayoutEffect } from 'react';
+import React, { FC, useState, useLayoutEffect, useEffect } from 'react';
 
 import { Card, Nav, Foot, ScrollBar } from '@/components';
 import { createComic, Areas, ComicKind } from '@/api/halihali';
@@ -6,12 +6,13 @@ import { VideoListData } from '@/api/halihali/halihali.interface';
 
 export const Comic: FC = function() {
   const [cards, setCards] = useState<VideoListData[]>([]);
+  const [page, setPage] = useState(0);
 
-  useLayoutEffect(() => {
-    createComic({ area: Areas['日本'] }).then(val => {
+  useEffect(() => {
+    createComic({ area: Areas['日本'], page }).then(val => {
       setCards(val);
     });
-  }, []);
+  });
 
   return (
     <ScrollBar>
@@ -34,13 +35,21 @@ export const Comic: FC = function() {
                 <Card
                   key={index}
                   imgSrc={val.thumbUrl}
-                  videoId={new URL(val.url!).pathname}
+                  videoId={val.url}
                   videoName={val.title}
                   subTitle={val.episode}
                 />
               );
             })
           : null}
+        <button
+          onClick={() => {
+            console.log(1111);
+            setPage(page + 1);
+          }}
+        >
+          next
+        </button>
         <Foot />
       </div>
     </ScrollBar>

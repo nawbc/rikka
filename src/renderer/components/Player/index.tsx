@@ -39,8 +39,7 @@ const Player: FC<PlayerOptions> = function(props) {
       screenshot: true,
       container: playerWrapper,
       preload: 'metadata',
-      theme: '#3d30f0',
-      ...props.options
+      theme: '#3d30f0'
     });
 
     const icons = playerWrapper.getElementsByClassName('dplayer-icon-content');
@@ -51,7 +50,7 @@ const Player: FC<PlayerOptions> = function(props) {
     rightSetting.insertBefore(selectCollectionBtn, settingNode);
 
     icons[5].innerHTML = settingIcon;
-  }, [props.options, url]);
+  }, [url]);
 
   return (
     <div className="player-container">

@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import "./index.css";
+import React, { FC } from 'react';
+import './index.css';
 
 export const About: FC = function(props) {
   return (
@@ -10,7 +10,7 @@ export const About: FC = function(props) {
 
       <div className="sticky anim750">
         <div className="front circle_wrapper anim750">
-          <div className="circle anim750"></div>
+          <div className="circle anim750" />
         </div>
       </div>
 
@@ -18,7 +18,7 @@ export const About: FC = function(props) {
 
       <div className="sticky anim750">
         <div className="back circle_wrapper anim750">
-          <div className="circle anim750"></div>
+          <div className="circle anim750" />
         </div>
       </div>
     </div>

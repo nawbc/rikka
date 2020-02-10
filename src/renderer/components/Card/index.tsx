@@ -26,7 +26,7 @@ const Card: FC<CardProps> = function(props) {
           <div className="content">
             <span className="author">{subTitle}</span>
             <p className="title">
-              <NavLink to={`/play${videoId || ''}`}>{videoName}</NavLink>
+              <NavLink to={`/play${videoId || ''}${videoName}`}>{videoName}</NavLink>
             </p>
             <p className="text">{desc}</p>
             {/* <a href={`${videoId}`} className="button">

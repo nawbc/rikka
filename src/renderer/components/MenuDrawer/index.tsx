@@ -5,6 +5,7 @@ import { Position } from './Position';
 import { RIcon } from '@/components';
 import { OtherDownloadOptions } from './OtherDownloadOptions';
 import { localStore, initStore } from '@/utils';
+import ClickDown from '../ClickDown';
 
 const { SubMenu } = Menu;
 
@@ -20,17 +21,22 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
   return (
     <div>
       <div
-        style={{
-          position: 'fixed',
-          top: '0px',
-          left: '0px',
-          zIndex: 999
-        }}
+        style={
+          {
+            position: 'fixed',
+            top: '0px',
+            left: '0px',
+            zIndex: 999,
+            WebkitAppRegion: 'no-drag'
+          } as any
+        }
         onClick={() => {
           setDisplay(true);
         }}
       >
-        <RIcon className="clickDown" size={[20, 20]} src={require('../../assets/menu.svg')} />
+        <ClickDown>
+          <RIcon size={[20, 20]} src={require('../../assets/menu.svg')} />
+        </ClickDown>
       </div>
       <Drawer
         width={300}
@@ -49,7 +55,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
           mode="inline"
         >
           {/* 下载 */}
-          <Menu.Item key="1">{<NavLink to="/setting/download">下载</NavLink>}</Menu.Item>
+          <Menu.Item key="1">{<NavLink to="/download">下载</NavLink>}</Menu.Item>
           {/* 关于 */}
           <Menu.Item key="2">关于</Menu.Item>
           {/* 播放源 */}
@@ -90,6 +96,24 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                 checked={localStore.get('setting.splash')}
               />
             </Menu.Item>
+            <Menu.Item
+              key="10"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <span>昼夜模式</span>
+              <Switch
+                size="small"
+                onClick={() => {
+                  forceUpdate(null);
+                  localStore.set('setting.dayNightMode', !localStore.get('setting.dayNightMode'));
+                }}
+                checked={localStore.get('setting.dayNightMode')}
+              />
+            </Menu.Item>
             <SubMenu
               key="downloadSetting"
               title={
@@ -118,6 +142,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                 />
               </Menu.Item>
             </SubMenu>
+            <Menu.Item key="8">全部设置</Menu.Item>
             <Menu.Item
               key="7"
               onClick={() => {

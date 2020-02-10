@@ -1,7 +1,9 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
+import { useTitle } from '@/utils';
 
-const Setting: FC = function() {
-  return <div>Setting</div>;
+const Download: FC = function() {
+  useTitle('下载');
+  return <div>Download</div>;
 };
 
-export default Setting;
+export default Download;

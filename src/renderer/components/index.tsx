@@ -12,3 +12,6 @@ export { default as Nav } from './Nav';
 export { default as Foot } from './Foot';
 export { default as ClickDown } from './ClickDown';
 export { default as Loading } from './Loading';
+export { default as DragAppBar } from './DragAppBar';
+export { default as UpdateList } from './UpdateList';
+export { default as Center } from './Center';

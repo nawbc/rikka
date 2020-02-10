@@ -4,14 +4,6 @@ import { halihaliUrl } from './source';
 import { VideoListData, UpdateCollections } from './halihali.interface';
 import { HaliHaliCode } from './constants';
 
-export const reassembleUrl = function(url: string, defaultURL: string) {
-  const { pathname } = urlLib.parse(url);
-  return urlLib.format({
-    host: defaultURL,
-    pathname
-  });
-};
-
 export const transformListData = function(data: string): VideoListData[] {
   const usefulData: VideoListData[] = [];
   const $ = cheerio.load(data);
@@ -22,12 +14,9 @@ export const transformListData = function(data: string): VideoListData[] {
       title: $(li[i])
         .find('.name')
         .text(),
-      url: reassembleUrl(
-        $(li[i])
-          .find('a')
-          .attr('href')!,
-        halihaliUrl
-      ),
+      url: $(li[i])
+        .find('a')
+        .attr('href')!,
       thumbUrl: $(li[i])
         .find('img')
         .attr('src')!,

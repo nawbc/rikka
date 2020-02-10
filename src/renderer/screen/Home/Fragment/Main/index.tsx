@@ -1,16 +1,19 @@
 import React, { FC, useState, useLayoutEffect } from 'react';
-
-import { Card, Nav, Foot, ScrollBar } from '@/components';
+import { Card, Nav, Foot, ScrollBar, UpdateList } from '@/components';
 import { createComic, Areas, ComicKind, createUpdateList } from '@/api/halihali';
-import { VideoListData } from '@/api/halihali/halihali.interface';
+import { UpdateCollections } from '@/api/halihali/halihali.interface';
+import { NavLink } from 'react-router-dom';
+import { createChildWindow } from '@/utils';
+import { ipcRenderer } from 'electron';
+
+const initData = [[{}]];
 
 export const Main: FC = function() {
-  const [updateList, setUpdateList] = useState([]);
-  const today = new Date().getDay() - 1;
+  const [updateList, setUpdateList] = useState<UpdateCollections>([]);
 
   useLayoutEffect(() => {
     createUpdateList().then(data => {
-      console.log(data);
+      setUpdateList(data);
     });
   }, []);
 
@@ -25,7 +28,7 @@ export const Main: FC = function() {
           padding: '0 20px'
         }}
       >
-        sadasd
+        <UpdateList lists={updateList} />
       </div>
     </ScrollBar>
   );

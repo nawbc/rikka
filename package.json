@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "author": {
     "name": "HanWang",
+    "alias": "dark-flame-bricker",
     "email": "wanghan9423@outlook.com"
   },
   "homepage": ".",
   "repository": {
-    "url": "https://github.com/sewerganger/rikka.git"
+    "url": "https://github.com/dark-flame-bricker/rikka.git"
   },
   "description": "爆裂吧现实粉碎吧精神放逐世界,邪王真眼强",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-react/build.js && electron-builder",
@@ -26,7 +27,7 @@
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest -c jest.unit.config.js",
     "test:e2e": "npm run pack && jest -c jest.e2e.config.js",
-    " asar": " asar pack build/win-unpacked app.asar"
+    "asar": " asar pack build/win-unpacked app.asar"
   },
   "publish": [
     {
@@ -36,7 +37,7 @@
   ],
   "build": {
     "productName": "邪王真眼",
-    "appId": "com.sewerganger.rikka",
+    "appId": "com.dark-flame-bricker.rikka",
     "directories": {
       "output": "build"
     },
@@ -62,21 +63,20 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "perMachine": true,
-      "installerIcon": "build/icons/icon.ico",
-      "uninstallerIcon": "build/icons/icon.ico"
+      "installerIcon": "static/icons/icon.ico",
+      "uninstallerIcon": "static/icons/icon.ico"
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "static/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico",
+      "icon": "static/icons/icon.ico",
       "target": [
-        "nsis",
-        "msi"
+        "nsis"
       ]
     },
     "linux": {
-      "icon": "build/icons",
+      "icon": "static/icons",
       "target": [
         "AppImage"
       ]
@@ -88,17 +88,18 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-router-dom": "^5.1.3",
     "@types/request-promise-native": "^1.0.17",
-    "antd": "^3.26.4",
+    "antd": "^3.26.8",
     "cheerio": "^1.0.0-rc.3",
     "delay": "^4.3.0",
     "dplayer": "^1.25.0",
+    "electron-log": "^4.0.6",
     "electron-store": "^5.1.0",
     "m3u8_multi_downloader": "^1.0.4",
     "node-downloader-helper": "^1.0.11",
     "react": "^16.10.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.10.2",
-    "react-keep-alive": "^2.5.2",
+    "react-keeper": "^2.2.2",
     "react-router-dom": "^5.1.2",
     "react-turn": "^1.0.5",
     "request-promise-native": "^1.0.8"
@@ -138,7 +139,6 @@
     "electron-builder": "^21.2.0",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
-    "electron-log": "^4.0.0",
     "electron-updater": "^4.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
@@ -173,7 +173,7 @@
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.4",
+    "typescript": "^3.7.5",
     "url-loader": "^2.2.0",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.10",

@@ -20,3 +20,17 @@ export interface VideoListData {
 }
 
 export type UpdateCollections = { url: URL; title: string; update: string }[][];
+
+export type SearchListData = {
+  url: string;
+  thumb: string;
+  title: string;
+  catid: string;
+  lianzaijs: string;
+  alias_full: string;
+  time: string;
+  sort: string;
+  star: string;
+  beizhu: string;
+  area: string;
+};

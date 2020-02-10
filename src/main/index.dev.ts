@@ -8,21 +8,21 @@
 /* eslint-disable */
 
 // Install `electron-debug` with `devtron`
-require("electron-debug")({ showDevTools: true });
+require('electron-debug')({ showDevTools: true });
 
 // Install `react-devtools`
-require("electron").app.on("ready", () => {
-  require("devtron").install();
+require('electron').app.on('ready', () => {
+  require('devtron').install();
 
-  let installExtension = require("electron-devtools-installer");
+  let installExtension = require('electron-devtools-installer');
 
   installExtension
     .default([installExtension.REACT_DEVELOPER_TOOLS])
     .then(() => {})
     .catch((err: Error) => {
-      console.log("Unable to install devtools: \n", err);
+      console.log('Unable to install devtools: \n', err);
     });
 });
 
 // Require `main` process to boot app
-require("./index");
+require('./index');

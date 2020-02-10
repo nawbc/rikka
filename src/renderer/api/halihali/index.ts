@@ -1,6 +1,11 @@
 // action=acg&page=1&year=0&area=all&class=0&dect=&id=
 import log from 'electron-log';
-import { RequestHaliHali, VideoListData, UpdateCollections } from './halihali.interface';
+import {
+  RequestHaliHali,
+  VideoListData,
+  UpdateCollections,
+  SearchListData
+} from './halihali.interface';
 import { createApiUri, createSearchApiUri } from './createApiUri';
 import {
   transformListData,
@@ -54,7 +59,7 @@ export const createSeries = async function(args?: RequestHaliHali): Promise<Vide
   return seriesTarget;
 };
 
-export const createSearch = async function(keyword: string): Promise<any> {
+export const createSearch = async function(keyword: string): Promise<SearchListData[]> {
   const uri = await createSearchApiUri(keyword);
   const data: string = await get({
     uri,

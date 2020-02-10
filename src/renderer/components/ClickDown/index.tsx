@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import "./index.css";
+import React, { FC } from 'react';
+import './index.css';
 
 const ClickDown: FC<any> = function(props) {
   const { children, ...rest } = props;
