@@ -57,28 +57,6 @@ export const color = {
 
 export const isNotIndexPage = () => /\/result|\/play|\/download|\/setting/.test(location.hash);
 
-export const createChildWindow = (entry: string, prop?: BrowserWindowConstructorOptions) => {
-  const winURL =
-    process.env.NODE_ENV === 'development'
-      ? `http://localhost:9080/${entry}`
-      : `file://${__dirname}/${entry}`;
-
-  const win = new remote.BrowserWindow({
-    transparent: true,
-    useContentSize: true,
-    frame: false,
-    resizable: false,
-    webPreferences: {
-      nodeIntegration: true,
-      webSecurity: false
-    },
-    ...prop
-  });
-  win.loadURL(winURL);
-  win.show();
-  return win;
-};
-
 export * from './hooks';
 
 export * from './store';

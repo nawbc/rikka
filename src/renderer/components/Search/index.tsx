@@ -5,7 +5,6 @@ import { RIcon } from '..';
 import './index.css';
 import { createSearch } from '@/api/halihali';
 import { SearchListData } from '@/api/halihali/halihali.interface';
-import { createChildWindow } from '@/utils';
 import { remote, ipcRenderer } from 'electron';
 const { Option } = AutoComplete as any;
 
@@ -60,13 +59,6 @@ const Search: FC<any> = function(props) {
             setMaskDisplay(true);
             setWidth('200px');
             if (width === '200px') {
-              const resultWindow = createChildWindow('searchResult.html', {
-                width: 600,
-                height: 600
-              });
-              resultWindow.webContents.on('did-finish-load', () => {
-                ipcRenderer.sendTo(resultWindow.webContents.id, 'message', dataSource);
-              });
             }
           }}
         >

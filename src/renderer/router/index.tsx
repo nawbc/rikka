@@ -11,7 +11,8 @@ export const routes: any[] = [
   {
     path: '/',
     component: Home,
-    exact: true
+    exact: true,
+    isCache: true
   },
   {
     path: '/download',

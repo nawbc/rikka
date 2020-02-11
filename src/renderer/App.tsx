@@ -1,9 +1,10 @@
 import React, { useState, useEffect, FC, useContext } from 'react';
 import { hot } from 'react-hot-loader/root';
-import { Route, HashRouter } from 'react-keeper';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 import { routes } from './router';
 import { MenuDrawer, Splash, Search, DragAppBar } from '@/components';
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import { localStore, initStore } from './utils';
 import CheckNetwork from './components/CheckNetwork';
 import HomeButton from './components/HomeButton';
@@ -48,14 +49,15 @@ const App: FC = () => {
         />
         <HashRouter basename="/">
           <>
-            {routes.map((obj, i) => (
-              <Route {...obj} key={i} />
-            ))}
+            {routes.map((obj, i) => {
+              const { isCache, ...rest } = obj;
+              return isCache ? <CacheRoute {...rest} key={i} /> : <Route {...rest} key={i} />;
+            })}
             <MenuDrawer />
-            {/* <Switch>
-            <Route exact path="/" component={Search} />
-            <Route path="/play" component={Search} />
-          </Switch> */}
+            <Switch>
+              <Route exact path="/" component={Search} />
+              <Route path="/play" component={Search} />
+            </Switch>
             <HomeButton />
           </>
         </HashRouter>

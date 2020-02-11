@@ -121,11 +121,12 @@ export class VideoApi {
           tokenTarget.yb_url2 = this.exact_plays(data, 'playarr_2');
         }
 
-        if (/playarr_2/.test(data)) {
+        if (/playarr/.test(data)) {
           tokenTarget.vid = this.exact_plays(data, 'playarr');
         }
       });
     }
+    await delay(0);
     // 处理集数一致;
     !Array.isArray(tokenTarget.vid) && (tokenTarget.vid = []);
     !Array.isArray(tokenTarget.yb_url1) && (tokenTarget.yb_url1 = []);

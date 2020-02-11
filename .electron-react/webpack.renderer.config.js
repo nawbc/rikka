@@ -30,10 +30,7 @@ const htmlPluginCommon = {
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
-    renderer: path.join(__dirname, '../src/renderer/index.tsx'),
-    searchResult: path.join(__dirname, '../src/renderer/screen/SearchResult/index.tsx'),
-    play: path.join(__dirname, '../src/renderer/screen/Play/index.tsx')
-    // vendor: Object.keys(pkg.dependencies)
+    renderer: path.join(__dirname, '../src/renderer/index.tsx')
   },
   // externals: [
   //   ...Object.keys(dependencies || {}).filter(
@@ -116,18 +113,6 @@ let rendererConfig = {
       chunks: ['renderer'],
       ...htmlPluginCommon
     }),
-    new HtmlWebpackPlugin({
-      filename: 'searchResult.html',
-      template: path.resolve(__dirname, '../src/templates/searchResult.ejs'),
-      chunks: ['searchResult'],
-      ...htmlPluginCommon
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'play.html',
-      template: path.resolve(__dirname, '../src/templates/play.ejs'),
-      chunks: ['play'],
-      ...htmlPluginCommon
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
@@ -164,32 +149,12 @@ if (isProd) {
   rendererConfig.devtool = '';
   rendererConfig.optimization = {
     minimize: true,
-    minimizer: [new TerserPlugin({ extractComments: false }), new OptimizeCSSAssetsPlugin({})],
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          // node_modules  都提取到vendor
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          priority: 10,
-          enforce: true
-        },
-        common: {
-          // 包含了 entry 中共有的代码
-          name: 'common',
-          minChunks: 2,
-          minSize: 30000
-        }
-      },
-      chunks: 'all',
-      minSize: 40000
-    }
+    minimizer: [new TerserPlugin({ extractComments: false }), new OptimizeCSSAssetsPlugin({})]
   };
 
   rendererConfig.plugins.push(
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: 'styles.css'
     }),
     new CopyWebpackPlugin([
       {

@@ -1,28 +1,26 @@
 /* eslint-disable prefer-const */
-import { RequestHaliHali } from "./halihali.interface";
-import { sortDataURL, searchURL } from "./source";
-import * as url from "url";
+import { RequestHaliHali } from './halihali.interface';
+import { sortDataURL, searchURL } from './source';
+import * as url from 'url';
 
-export const createSearchApiUri = async function(q = ""): Promise<string> {
+export const createSearchApiUri = async function(q = ''): Promise<string> {
   return url.format({
     host: searchURL,
     query: {
       q,
       top: 10,
-      dect: ""
+      dect: ''
     }
   });
 };
 
-export const createApiUri = async function(
-  args: RequestHaliHali
-): Promise<string> {
+export const createApiUri = async function(args: RequestHaliHali): Promise<string> {
   let { action, year, dect, kind, id, area, page } = args!;
   year = year || 0;
-  area = area || "all";
+  area = area || 'all';
   kind = kind || 0;
-  dect = dect || "";
-  id = id || "";
+  dect = dect || '';
+  id = id || '';
   page = page || 1;
 
   return url.format({

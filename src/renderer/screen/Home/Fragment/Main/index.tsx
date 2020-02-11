@@ -3,7 +3,6 @@ import { Card, Nav, Foot, ScrollBar, UpdateList } from '@/components';
 import { createComic, Areas, ComicKind, createUpdateList } from '@/api/halihali';
 import { UpdateCollections } from '@/api/halihali/halihali.interface';
 import { NavLink } from 'react-router-dom';
-import { createChildWindow } from '@/utils';
 import { ipcRenderer } from 'electron';
 
 const initData = [[{}]];

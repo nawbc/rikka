@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export interface CardProps {
   imgSrc?: string;
-  videoId?: string;
+  url?: string;
   subTitle?: string;
   desc?: string;
   videoName?: string;
@@ -12,8 +12,7 @@ export interface CardProps {
 }
 
 const Card: FC<CardProps> = function(props) {
-  const { imgSrc, videoName, videoId, videoSrc, subTitle, desc, ...rest } = props;
-
+  const { imgSrc, videoName, url, videoSrc, subTitle, desc, ...rest } = props;
   return (
     <div className="card" {...rest}>
       <div
@@ -26,7 +25,7 @@ const Card: FC<CardProps> = function(props) {
           <div className="content">
             <span className="author">{subTitle}</span>
             <p className="title">
-              <NavLink to={`/play${videoId || ''}${videoName}`}>{videoName}</NavLink>
+              <NavLink to={`play${url || ''}${videoName}`}>{videoName}</NavLink>
             </p>
             <p className="text">{desc}</p>
             {/* <a href={`${videoId}`} className="button">

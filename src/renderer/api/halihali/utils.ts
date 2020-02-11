@@ -10,13 +10,16 @@ export const transformListData = function(data: string): VideoListData[] {
   const li = $('li');
 
   for (let i = 0; i < li.length; i++) {
+    const href = $(li[i])
+      .find('a')
+      .attr('href');
+    const url = !!href && href.includes('http') ? urlLib.parse(href).pathname : (href as any);
+
     usefulData.push({
       title: $(li[i])
         .find('.name')
         .text(),
-      url: $(li[i])
-        .find('a')
-        .attr('href')!,
+      url,
       thumbUrl: $(li[i])
         .find('img')
         .attr('src')!,

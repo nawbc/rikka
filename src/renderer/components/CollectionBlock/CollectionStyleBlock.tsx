@@ -51,7 +51,7 @@ const CollectionStyleBlock: FC<any> = function(props) {
             <ClickDown
               onClick={() => {
                 localStore.set(SETTING_REVERSE, !isReverse);
-                forceUpdate(null);
+                forceUpdate();
               }}
             >
               {isReverse ? (
@@ -63,7 +63,7 @@ const CollectionStyleBlock: FC<any> = function(props) {
             <ClickDown
               onClick={() => {
                 localStore.set(SETTING_COLLECTION_STYLE, isBar ? 'block' : 'bar');
-                forceUpdate(null);
+                forceUpdate();
               }}
             >
               {isBar ? (

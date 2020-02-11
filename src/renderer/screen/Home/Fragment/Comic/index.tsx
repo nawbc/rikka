@@ -3,16 +3,17 @@ import React, { FC, useState, useLayoutEffect, useEffect } from 'react';
 import { Card, Nav, Foot, ScrollBar } from '@/components';
 import { createComic, Areas, ComicKind } from '@/api/halihali';
 import { VideoListData } from '@/api/halihali/halihali.interface';
+import { Pagination } from 'antd';
 
 export const Comic: FC = function() {
   const [cards, setCards] = useState<VideoListData[]>([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     createComic({ area: Areas['日本'], page }).then(val => {
       setCards(val);
     });
-  });
+  }, [page]);
 
   return (
     <ScrollBar>
@@ -35,21 +36,20 @@ export const Comic: FC = function() {
                 <Card
                   key={index}
                   imgSrc={val.thumbUrl}
-                  videoId={val.url}
+                  url={val.url}
                   videoName={val.title}
                   subTitle={val.episode}
                 />
               );
             })
           : null}
-        <button
-          onClick={() => {
-            console.log(1111);
-            setPage(page + 1);
+        <Pagination
+          defaultCurrent={1}
+          total={3240}
+          onChange={(num: number) => {
+            setPage(num);
           }}
-        >
-          next
-        </button>
+        />
         <Foot />
       </div>
     </ScrollBar>

@@ -2,7 +2,6 @@ import React, { FC, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ipcRenderer } from 'electron';
 import { DragAppBar } from '@/components';
-import '../../stylesheet/index.css';
 import { useTitle } from '@/utils';
 
 const SearchResult: FC = function() {
@@ -24,5 +23,3 @@ const SearchResult: FC = function() {
     </div>
   );
 };
-
-ReactDOM.render(<SearchResult />, document.getElementById('root'));

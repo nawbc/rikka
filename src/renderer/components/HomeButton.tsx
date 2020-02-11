@@ -27,7 +27,6 @@ const HomeButton: FC<any> = function(props) {
             }}
           />
         </MainButton>
-        <MenuDrawer />
       </NavLink>
     </div>
   );

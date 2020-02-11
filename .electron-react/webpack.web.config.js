@@ -93,19 +93,6 @@ let webConfig = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, '../src/templates/index.ejs'),
-      chunks: ['renderer'],
-      ...htmlPluginCommon
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'searchResult.html',
-      template: path.resolve(__dirname, '../src/templates/searchResult.ejs'),
-      chunks: ['searchResult'],
-      ...htmlPluginCommon
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'play.html',
-      template: path.resolve(__dirname, '../src/templates/play.ejs'),
-      chunks: ['play'],
       ...htmlPluginCommon
     }),
     new webpack.DefinePlugin({

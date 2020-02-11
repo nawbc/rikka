@@ -58,31 +58,6 @@ function createWindow() {
     mainWindow!.setSkipTaskbar(true);
     event.preventDefault();
   });
-
-  const iconPath = resolve(__dirname, '../../static/icons/tray.png');
-  const icon = nativeImage.createFromPath(iconPath);
-  tray = new Tray(icon);
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: '显示',
-      click: () => {
-        mainWindow!.show();
-      }
-    },
-    {
-      label: '退出',
-      click: () => {
-        mainWindow!.destroy();
-      }
-    }
-  ]);
-  tray.setToolTip('邪王真眼最强');
-  tray.setContextMenu(contextMenu);
-
-  tray.on('click', () => {
-    mainWindow!.isVisible() ? mainWindow!.hide() : mainWindow!.show();
-    mainWindow!.isVisible() ? mainWindow!.setSkipTaskbar(false) : mainWindow!.setSkipTaskbar(true);
-  });
 }
 
 app.on('ready', createWindow);

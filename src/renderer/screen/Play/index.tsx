@@ -37,6 +37,7 @@ const Play: FC<any> = function(props) {
   const [intro, setIntro] = useState();
   const { height } = useWindowResize();
   const { id, type, name } = props.match.params;
+  console.log(props);
   const introUrl = format({
     host: halihaliUrl,
     pathname: `/${type}/${id}/`

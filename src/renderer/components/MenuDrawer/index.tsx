@@ -90,7 +90,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
               <Switch
                 size="small"
                 onClick={() => {
-                  forceUpdate(null);
+                  forceUpdate();
                   localStore.set('setting.splash', !localStore.get('setting.splash'));
                 }}
                 checked={localStore.get('setting.splash')}
@@ -108,7 +108,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
               <Switch
                 size="small"
                 onClick={() => {
-                  forceUpdate(null);
+                  forceUpdate();
                   localStore.set('setting.dayNightMode', !localStore.get('setting.dayNightMode'));
                 }}
                 checked={localStore.get('setting.dayNightMode')}
@@ -152,7 +152,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                   message: '',
                   description: '设置已重置'
                 });
-                forceUpdate(null);
+                forceUpdate();
               }}
             >
               重置

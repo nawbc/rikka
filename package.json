@@ -99,7 +99,7 @@
     "react": "^16.10.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.10.2",
-    "react-keeper": "^2.2.2",
+    "react-router-cache-route": "^1.8.4",
     "react-router-dom": "^5.1.2",
     "react-turn": "^1.0.5",
     "request-promise-native": "^1.0.8"
