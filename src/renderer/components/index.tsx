@@ -7,6 +7,7 @@ export { default as MainButton } from './MainButton';
 export { default as ScrollBar } from './ScrollBar';
 export { default as Search } from './Search';
 export { default as CheckNetwork } from './CheckNetwork';
+export { default as HomeButton } from './HomeButton';
 export { default as CollectionBlock } from './CollectionBlock';
 export { default as Nav } from './Nav';
 export { default as Foot } from './Foot';

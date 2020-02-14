@@ -1,0 +1,33 @@
+.reset-button {
+  position: relative;
+  padding: 5px;
+  background-color: #bdbdbdde;
+  box-shadow: 1px 1px 8px #a8a8a8d9;
+}
+
+.reset-button::before {
+  background-image: radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #adadad 20%, transparent 30%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #adadad 15%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%);
+}
+
+.reset-button::after {
+  background-image: radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #adadad 15%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%),
+    radial-gradient(circle, #adadad 20%, transparent 20%);
+}
+
+.reset-button:active {
+  background-color: #afafaf;
+  box-shadow: 0 2px 25px #6d6d6dd9;
+}

@@ -47,6 +47,10 @@ const schema: any = {
       collectionsStyle: {
         type: 'string',
         default: 'bar'
+      },
+      isExitDirectly: {
+        type: 'boolean',
+        default: false
       }
     }
   },

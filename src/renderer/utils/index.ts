@@ -1,4 +1,4 @@
-import { remote, BrowserWindowConstructorOptions } from 'electron';
+import { useState } from 'react';
 
 export type SizeType =
   | 'tiny'
@@ -38,6 +38,8 @@ export const is = {
 
 export const accordType = (a: any, b: string, c: any) => (is.type(a, b) ? a : c);
 
+export const existStr = (a: string) => (!!a ? a : '');
+
 /* eslint-disable @typescript-eslint/indent*/
 export const handleSize = (size: SizeType): SizeType =>
   Array.isArray(size)
@@ -56,6 +58,26 @@ export const color = {
 };
 
 export const isNotIndexPage = () => /\/result|\/play|\/download|\/setting/.test(location.hash);
+
+export const randomNumber = (min: number, max: number): number =>
+  min + Math.floor(Math.random() * (max - min)) + 1;
+
+let audioCanPlay = true;
+export const randomAudio = (arr: string[]) => {
+  if (audioCanPlay) {
+    const soundPath = arr[randomNumber(0, arr.length - 1)];
+    const audio = new Audio(soundPath);
+    audioCanPlay = false;
+    audio.play();
+    audio.onended = () => {
+      audioCanPlay = true;
+    };
+  }
+};
+
+export const changeTitle = function(t: string): void {
+  document.getElementById('app-title')!.innerText = t;
+};
 
 export * from './hooks';
 

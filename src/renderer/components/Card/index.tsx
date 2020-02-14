@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
-import './card.css';
+import React, { FC, useState, ImgHTMLAttributes } from 'react';
+import './index.css';
+// import './card.css';
 import { NavLink } from 'react-router-dom';
 
 export interface CardProps {
@@ -8,30 +9,27 @@ export interface CardProps {
   subTitle?: string;
   desc?: string;
   videoName?: string;
-  videoSrc?: string;
 }
 
 const Card: FC<CardProps> = function(props) {
-  const { imgSrc, videoName, url, videoSrc, subTitle, desc, ...rest } = props;
+  const { imgSrc, videoName, url, subTitle, desc, ...rest } = props;
+
   return (
     <div className="card" {...rest}>
-      <div
-        className="wrapper"
-        style={{
-          background: `url(${imgSrc}) center/cover no-repeat`
+      <img
+        src={imgSrc}
+        onError={e => {
+          const errorTarget = e.target as HTMLImageElement;
+          errorTarget.src = require('../../assets/error_img.jpg');
         }}
-      >
-        <div className="data">
-          <div className="content">
-            <span className="author">{subTitle}</span>
-            <p className="title">
-              <NavLink to={`play${url || ''}${videoName}`}>{videoName}</NavLink>
-            </p>
-            <p className="text">{desc}</p>
-            {/* <a href={`${videoId}`} className="button">
-              详情
-      </a> */}
-          </div>
+      />
+      <div className="data">
+        <div className="content">
+          <p className="title">
+            <NavLink to={`play${url || ''}${videoName}`}>{videoName}</NavLink>
+          </p>
+          <span className="author">{subTitle || '不可视之境界'}</span>
+          <p className="text">{desc}</p>
         </div>
       </div>
     </div>

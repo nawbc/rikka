@@ -6,7 +6,6 @@ import { HaliHaliCode } from './constants';
 import delay from 'delay';
 import { setHeaders, transformIntroduce } from './utils';
 import * as path from 'path';
-import { headers } from '.';
 
 interface InitScriptsContent {
   vid: string[][];
@@ -105,6 +104,7 @@ export class VideoApi {
 
   private async handle_init_scripts_content(scripts: string[]): Promise<InitScriptsContent> {
     const tokenTarget: InitScriptsContent = initCollectionContent;
+
     for (const url of scripts) {
       await delay(0);
       await get({
@@ -112,21 +112,25 @@ export class VideoApi {
         headers: setHeaders({
           Referer: this.init_url
         })
-      }).then(data => {
-        if (/playarr_1/.test(data)) {
-          tokenTarget.yb_url1 = this.exact_plays(data, 'playarr_1');
-        }
+      })
+        .then(data => {
+          if (/playarr_1/.test(data)) {
+            tokenTarget.yb_url1 = this.exact_plays(data, 'playarr_1');
+          }
 
-        if (/playarr_2/.test(data)) {
-          tokenTarget.yb_url2 = this.exact_plays(data, 'playarr_2');
-        }
+          if (/playarr_2/.test(data)) {
+            tokenTarget.yb_url2 = this.exact_plays(data, 'playarr_2');
+          }
 
-        if (/playarr/.test(data)) {
-          tokenTarget.vid = this.exact_plays(data, 'playarr');
-        }
-      });
+          if (/playarr/.test(data)) {
+            tokenTarget.vid = this.exact_plays(data, 'playarr');
+          }
+        })
+        .catch(err => {
+          throw new Error(`Error[${HaliHaliCode.FETCH_ERROR}]` + err);
+        });
     }
-    await delay(0);
+
     // 处理集数一致;
     !Array.isArray(tokenTarget.vid) && (tokenTarget.vid = []);
     !Array.isArray(tokenTarget.yb_url1) && (tokenTarget.yb_url1 = []);
@@ -248,9 +252,14 @@ export class VideoApi {
         Host: 'halihali.li',
         Referer: path.parse(this.init_url).dir
       })
+    }).catch(err => {
+      throw new Error(`Error[${HaliHaliCode.FETCH_ERROR}]` + err);
     });
-    const scripts = await this.get_init_scripts(data);
+    const scripts = await this.get_init_scripts(data).catch(err => {
+      throw new Error(`Error[${HaliHaliCode.PARSE_ERROR}]` + err);
+    });
     this.collections = await this.handle_init_scripts_content(scripts);
+    console.log(this.collections);
     return this;
   }
 

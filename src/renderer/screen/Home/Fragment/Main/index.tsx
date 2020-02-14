@@ -1,11 +1,8 @@
 import React, { FC, useState, useLayoutEffect } from 'react';
-import { Card, Nav, Foot, ScrollBar, UpdateList } from '@/components';
-import { createComic, Areas, ComicKind, createUpdateList } from '@/api/halihali';
+import { ScrollBar, UpdateList } from '@/components';
+import { createUpdateList } from '@/api/halihali';
 import { UpdateCollections } from '@/api/halihali/halihali.interface';
-import { NavLink } from 'react-router-dom';
-import { ipcRenderer } from 'electron';
-
-const initData = [[{}]];
+import { useTitle } from '@/utils';
 
 export const Main: FC = function() {
   const [updateList, setUpdateList] = useState<UpdateCollections>([]);
@@ -28,6 +25,13 @@ export const Main: FC = function() {
         }}
       >
         <UpdateList lists={updateList} />
+        <button
+          onClick={() => {
+            console.log(111);
+          }}
+        >
+          Fuck
+        </button>
       </div>
     </ScrollBar>
   );

@@ -1,0 +1,7 @@
+.nav-block:hover {
+  background-color: aqua;
+}
+
+.nav-selected {
+  background: pink;
+}

@@ -1,0 +1,10 @@
+.rikka-logo {
+  transition: transform 200ms ease-in;
+  will-change: transform;
+  transform: scale(1);
+}
+
+.rikka-logo:hover {
+  transform: scale(1.02);
+}
+  

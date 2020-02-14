@@ -48,6 +48,10 @@ function createWindow() {
     mainWindow!.close();
   });
 
+  ipcMain.on('direct-close', () => {
+    mainWindow!.destroy();
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -57,6 +61,33 @@ function createWindow() {
     // 不在任务栏显示
     mainWindow!.setSkipTaskbar(true);
     event.preventDefault();
+  });
+
+  const iconPath = resolve(__dirname, '../../static/icons/tray.png');
+  const trayIcon = nativeImage.createFromPath(iconPath);
+  tray = new Tray(trayIcon);
+  tray.setImage(trayIcon);
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: '显示',
+      click: () => {
+        mainWindow!.show();
+      }
+    },
+    {
+      label: '退出',
+      click: () => {
+        mainWindow!.destroy();
+      }
+    }
+  ]);
+  tray.setToolTip('邪王真眼最强');
+  tray.setContextMenu(contextMenu);
+
+  tray.on('click', () => {
+    mainWindow!.isVisible() ? mainWindow!.hide() : mainWindow!.show();
+    mainWindow!.isVisible() ? mainWindow!.setSkipTaskbar(false) : mainWindow!.setSkipTaskbar(true);
   });
 }
 

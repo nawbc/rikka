@@ -23,3 +23,5 @@ const SearchResult: FC = function() {
     </div>
   );
 };
+
+export default SearchResult;

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState, useLayoutEffect } from 'react';
 import DPlayer, { DPlayerOptions } from 'dplayer';
 import { settingIcon } from './Icons';
 import './index.css';
@@ -32,15 +32,17 @@ const Player: FC<PlayerOptions> = function(props) {
   };
   useEffect(() => {
     const playerWrapper = (wrapper.current as unknown) as HTMLDivElement;
-    new DPlayer({
-      video: {
-        url
-      },
-      screenshot: true,
-      container: playerWrapper,
-      preload: 'metadata',
-      theme: '#3d30f0'
-    });
+    try {
+      new DPlayer({
+        video: {
+          url: decodeURIComponent(url)
+        },
+        screenshot: true,
+        container: playerWrapper,
+        preload: 'metadata',
+        theme: '#3d30f0'
+      });
+    } catch (err) {}
 
     const icons = playerWrapper.getElementsByClassName('dplayer-icon-content');
     const rightSetting = playerWrapper.getElementsByClassName('dplayer-icons-right')[0];

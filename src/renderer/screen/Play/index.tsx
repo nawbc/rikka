@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useMemo, useContext } from 'react';
+import React, { FC, useEffect, useState, useMemo, useContext, useLayoutEffect } from 'react';
 import { Player, CollectionBlock } from '@/components';
 import { VideoApi, VideoSrcApi } from '@/api/halihali/videoApi';
 import { useTitle, useWindowResize } from '@/utils';
@@ -37,13 +37,13 @@ const Play: FC<any> = function(props) {
   const [intro, setIntro] = useState();
   const { height } = useWindowResize();
   const { id, type, name } = props.match.params;
-  console.log(props);
+
   const introUrl = format({
     host: halihaliUrl,
     pathname: `/${type}/${id}/`
   });
 
-  useTitle(name);
+  // useTitle(name);
 
   const currentVideo = useMemo(async () => {
     return new VideoApi(introUrl + '1.html', type).init();
@@ -53,7 +53,7 @@ const Play: FC<any> = function(props) {
     return createIntroduce(introUrl);
   }, [introUrl]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     currentVideo
       .then(e => e.index(collection))
       .then(e => e.origin(origin))
@@ -64,23 +64,13 @@ const Play: FC<any> = function(props) {
       .catch(err => {
         notification.open({
           message: '',
-          description: '视频获取错误'
+          description: '视频获取错误, 请尝试切换视频源',
+          duration: 3000
         });
         log.error(err);
-      });
-    introduce
-      .then(data => {
-        setIntro(data);
-      })
-      .catch(err => {
-        notification.open({
-          message: '',
-          description: '视频信息获取错误'
-        });
-        log.error(err);
-        setIntro('error');
       });
   }, [collection, src]);
+  ``;
 
   return (
     <div
@@ -90,7 +80,7 @@ const Play: FC<any> = function(props) {
       }}
     >
       <Player src={src} />
-      <CollectionBlock
+      {/* <CollectionBlock
         onSetOrigin={num => {
           setOrigin(num);
         }}
@@ -99,7 +89,7 @@ const Play: FC<any> = function(props) {
         onSelectCollection={num => {
           selectCollection(num);
         }}
-      />
+      /> */}
     </div>
   );
 };

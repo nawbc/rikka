@@ -4,6 +4,7 @@ import ClickDown from '../ClickDown';
 import { UpdateCollections } from '@/api/halihali/halihali.interface';
 import { Tabs, List } from 'antd';
 import { ScrollBar } from '..';
+import './index.css';
 
 interface UpdateLisProp {
   lists: UpdateCollections;
@@ -35,10 +36,9 @@ const UpdateList: FC<UpdateLisProp> = function(props) {
   const today = new Date().getDay() - 1;
   return (
     <div
-      className="update-list-wrapper"
-      style={{ width: 300, height: 400, display: 'inline-block' }}
+      style={{ width: 300, height: 400, display: 'inline-block', position: 'absolute', right: 60 }}
     >
-      <Tabs tabPosition="right">
+      <Tabs tabPosition="right" className="update-table">
         {lists.map((val, index) => {
           return (
             <TabPane tab={displayDay(index)} key={index.toString()}>

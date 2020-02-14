@@ -2,6 +2,7 @@ import Home from '@/screen/Home';
 // import Series from "@/screen/Home/Fragment/Series";
 // import Movie from "@/screen/Home/Fragment/Movie";
 import Download from '@/screen/Download';
+import Setting from '@/screen/Setting';
 // import SearchResult from '@/screen/SearchResult';
 import Play from '@/screen/Play';
 import { About } from '@/screen/About';
@@ -32,10 +33,13 @@ export const routes: any[] = [
     component: About
   },
   {
-    path: '/test',
-    component: Test
+    path: '/setting',
+    component: Setting,
+    exact: true,
+    cache: true
   },
   {
-    path: '/ads'
+    path: '/test',
+    component: Test
   }
 ];

@@ -1,11 +1,12 @@
 import React, { FC, useState, useReducer } from 'react';
 import { Menu, Drawer, Switch, Icon, notification } from 'antd';
 import { NavLink } from 'react-router-dom';
-import { Position } from './Position';
+import { FilePosition } from './FilePosition';
 import { RIcon } from '@/components';
 import { OtherDownloadOptions } from './OtherDownloadOptions';
-import { localStore, initStore } from '@/utils';
+import { localStore, initStore, randomAudio } from '@/utils';
 import ClickDown from '../ClickDown';
+import './index.css';
 
 const { SubMenu } = Menu;
 
@@ -58,17 +59,6 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
           <Menu.Item key="1">{<NavLink to="/download">下载</NavLink>}</Menu.Item>
           {/* 关于 */}
           <Menu.Item key="2">关于</Menu.Item>
-          {/* 播放源 */}
-          {/*<SubMenu
-            key="source"
-            title={
-              <span>
-                <span>播放源</span>
-              </span>
-            }
-          >
-            <Menu.Item key="6">哈哩哈哩</Menu.Item>
-          </SubMenu> */}
           {/*设置*/}
           <SubMenu
             key="setting"
@@ -123,7 +113,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
               }
             >
               <Menu.Item key="4">
-                <Position
+                <FilePosition
                   optionTitle="保存路径"
                   title="设置下载位置"
                   setting={['setting', 'downloadPosition']}
@@ -161,13 +151,21 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
         </Menu>
         <RIcon
           src={require('../../assets/rikkia.svg')}
+          className="rikka-logo"
+          onClick={() => {
+            randomAudio([
+              require('../../assets/sound/e.mp3'),
+              require('../../assets/sound/mega.mp3'),
+              require('../../assets/sound/rikka.mp3'),
+              require('../../assets/sound/saogao.mp3')
+            ]);
+          }}
           style={{
             width: '200px',
             height: '245px',
-            bottom: '0px',
+            bottom: '5px',
             left: '0px',
-            position: 'absolute',
-            zIndex: -1000
+            position: 'absolute'
           }}
         />
       </Drawer>

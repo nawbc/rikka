@@ -11,21 +11,10 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const pkg = require('../package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isNotProd = process.env.NODE_ENV !== 'production';
 const rendererPath = path.resolve('src/renderer');
-const htmlPluginCommon = {
-  minify: {
-    removeRedundantAttributes: true, // 删除多余的属性
-    collapseWhitespace: true, // 折叠空白区域
-    removeAttributeQuotes: true, // 移除属性的引号
-    removeComments: true, // 移除注释
-    collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
-  },
-  nodeModules: isNotProd ? path.resolve(__dirname, '../node_modules') : false
-};
 
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
@@ -39,20 +28,6 @@ let rendererConfig = {
   // ],
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader'],
-        include: [rendererPath]
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'sass-loader?indentedSyntax'
-        ],
-        include: [rendererPath]
-      },
       {
         test: /\.css$/,
         use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
@@ -109,9 +84,15 @@ let rendererConfig = {
     new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve(__dirname, '../src/templates/index.ejs'),
-      chunks: ['renderer'],
-      ...htmlPluginCommon
+      template: path.resolve(__dirname, '../src/index.ejs'),
+      minify: {
+        removeRedundantAttributes: true, // 删除多余的属性
+        collapseWhitespace: true, // 折叠空白区域
+        removeAttributeQuotes: true, // 移除属性的引号
+        removeComments: true, // 移除注释
+        collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
+      },
+      nodeModules: isNotProd ? path.resolve(__dirname, '../node_modules') : false
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

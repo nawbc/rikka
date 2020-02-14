@@ -1,0 +1,19 @@
+.update-table.ant-tabs .ant-tabs-left-bar .ant-tabs-tab,
+.ant-tabs .ant-tabs-right-bar .ant-tabs-tab {
+  margin: 0 0 5px 0 !important;
+  padding: 8px 14px !important;
+}
+.update-table.ant-tabs .ant-tabs-left-bar .ant-tabs-nav-container,
+.ant-tabs .ant-tabs-right-bar .ant-tabs-nav-container,
+.ant-tabs .ant-tabs-left-bar .ant-tabs-nav-wrap,
+.ant-tabs .ant-tabs-right-bar .ant-tabs-nav-wrap {
+  height: unset !important;
+}
+
+.update-table.ant-tabs .ant-tabs-right-content {
+  border: none;
+}
+
+.update-table .ant-tabs-right-content {
+  padding: unset !important;
+}

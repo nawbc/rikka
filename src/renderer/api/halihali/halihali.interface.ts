@@ -5,7 +5,7 @@
 export interface RequestHaliHali {
   action?: string; // acg 动漫　tv电视剧
   page?: number; // 页数
-  year?: number; // 年代
+  year?: number | string; // 年代
   area?: string; // 地区
   kind?: number | string; // 类型 对应class
   dect?: any; // 貌似没多大用

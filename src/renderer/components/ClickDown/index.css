@@ -1,7 +1,8 @@
 .button-down {
   position: relative;
   transition: transform 100ms ease-in;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 
 .button-down:hover {

@@ -12,7 +12,7 @@ interface PositionCpt {
   icon: React.ReactNode;
 }
 
-export const Position: FC<PositionCpt> = function(props) {
+export const FilePosition: FC<PositionCpt> = function(props) {
   const { title, optionTitle, icon, setting } = props;
 
   return (

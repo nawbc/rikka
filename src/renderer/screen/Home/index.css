@@ -1,0 +1,30 @@
+.main-tabs .ant-tabs-bar {
+  border: unset;
+  margin: unset;
+}
+
+.main-tabs .ant-tabs-nav-scroll {
+  display: flex;
+  justify-content: space-around;
+}
+
+.main-tabs .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+  background: #3d30f0;
+  height: 50%;
+  opacity: 0.2;
+}
+.main-tabs .ant-tabs-nav .ant-tabs-tab-active {
+  color: #3d30f0;
+}
+
+.main-tabs .ant-tabs-nav .ant-tabs-tab:hover {
+  color: #3d30f0;
+}
+
+.main-tabs .ant-tabs-nav-container {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(255, 255, 255, 0.226);
+}

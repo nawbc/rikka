@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { handleSize, accordType } from '@/utils';
+import { handleSize, accordType, existStr } from '@/utils';
 
 const Icon: FC<any> = function(props) {
-  const { size, src, style, ...rest } = props;
+  const { size, src, style, className, ...rest } = props;
 
   return (
     <i
-      className={'icon ' + props.className}
+      className={'icon ' + existStr(className)}
       {...rest}
       style={{
         ...accordType(handleSize(size), 'Object', {}),

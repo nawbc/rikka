@@ -1,13 +1,12 @@
-import React, { useState, useEffect, FC, useContext } from 'react';
+import { MenuDrawer, Splash, Search, DragAppBar, CheckNetwork, HomeButton } from '@/components';
+import { Route, HashRouter, Switch } from 'react-router-dom';
+import React, { useState, FC, useLayoutEffect } from 'react';
+import CacheRoute from 'react-router-cache-route';
+import { localStore, initStore, useInitLeanCloud } from './utils';
+import { Modal, Icon, Checkbox } from 'antd';
 import { hot } from 'react-hot-loader/root';
-import { Route, Switch, HashRouter } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 import { routes } from './router';
-import { MenuDrawer, Splash, Search, DragAppBar } from '@/components';
-import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
-import { localStore, initStore } from './utils';
-import CheckNetwork from './components/CheckNetwork';
-import HomeButton from './components/HomeButton';
 import './stylesheet/index.css';
 
 export const APP_MAIN_TITLE = '邪王真眼 --- 爆裂吧，番剧！ 粉碎吧，精神, 放逐这个世界！';
@@ -16,13 +15,49 @@ export const ctx = React.createContext({
   theme: 'light',
   title: document.title
 });
-const cachedPaged = ['home', 'play'];
+
+const confirmExit = () => {
+  Modal.confirm({
+    title: '是否直接退出主程序 ？',
+    content: (
+      <div>
+        <p>
+          <span style={{ marginRight: 10 }}>不再提示</span>
+          <Checkbox
+            onChange={() => {
+              localStore.set('setting.isExitDirectly', true);
+            }}
+          />
+        </p>
+      </div>
+    ),
+    okText: '确认',
+    cancelText: '取消',
+    icon: <Icon type="coffee" />,
+    onOk: () => {
+      ipcRenderer.send('direct-close');
+    },
+    onCancel: () => {
+      ipcRenderer.send('close');
+    },
+    okButtonProps: {
+      type: 'link'
+    },
+    cancelButtonProps: {
+      type: 'link'
+    }
+  });
+};
 
 const App: FC = () => {
   const [isDisplaySplash, setDisplaySplash] = useState(true);
   const [inProp, setInProp] = useState(true);
   const splashItem = localStore.get('setting.splash');
-  useEffect(() => {
+
+  // 初始化leancloud服务
+  useInitLeanCloud();
+
+  useLayoutEffect(() => {
     initStore();
     if (splashItem) {
       setTimeout(() => {
@@ -39,27 +74,27 @@ const App: FC = () => {
     <>
       <CheckNetwork>
         {isDisplaySplash && splashItem ? <Splash inProp={inProp} duration={400} /> : null}
-        <DragAppBar
-          onClose={() => {
-            ipcRenderer.send('close');
-          }}
-          onMini={() => {
-            ipcRenderer.send('min');
-          }}
-        />
         <HashRouter basename="/">
-          <>
-            {routes.map((obj, i) => {
-              const { isCache, ...rest } = obj;
-              return isCache ? <CacheRoute {...rest} key={i} /> : <Route {...rest} key={i} />;
-            })}
-            <MenuDrawer />
-            <Switch>
-              <Route exact path="/" component={Search} />
-              <Route path="/play" component={Search} />
-            </Switch>
-            <HomeButton />
-          </>
+          <DragAppBar
+            onClose={() => {
+              !!localStore.get('setting.isExitDirectly')
+                ? ipcRenderer.send('direct-close')
+                : confirmExit();
+            }}
+            onMini={() => {
+              ipcRenderer.send('min');
+            }}
+          />
+          {routes.map((obj, i) => {
+            const { isCache, ...rest } = obj;
+            return isCache ? <CacheRoute {...rest} key={i} /> : <Route {...rest} key={i} />;
+          })}
+          <MenuDrawer />
+          <Switch>
+            <Route exact path="/" component={Search} />
+            <Route path="/play" component={Search} />
+          </Switch>
+          <HomeButton />
         </HashRouter>
       </CheckNetwork>
     </>

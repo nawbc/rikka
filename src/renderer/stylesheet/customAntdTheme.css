@@ -161,42 +161,8 @@
   border-radius: unset;
 }
 
-/* nav  scroll */
-/* .ant-tabs-bar {
-  border: unset;
-  margin: unset;
-}
-
-.ant-tabs-nav-scroll {
-  display: flex;
-  justify-content: space-around;
-}
-
-.ant-tabs-top .ant-tabs-ink-bar-animated,
-.ant-tabs-bottom .ant-tabs-ink-bar-animated {
-  background: #3d30f0;
-  height: 50%;
-  opacity: 0.2;
-}
-
-.ant-tabs-nav .ant-tabs-tab-active {
-  color: #3d30f0;
-}
-
-.ant-tabs-nav .ant-tabs-tab:hover {
-  color: #3d30f0;
-}
-
-.ant-tabs-nav-container {
-  position: fixed;
-  width: 100%;
-  z-index: 999;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.226);
-} */
-
 .ant-modal-mask {
-  backdrop-filter: blur(10px);
+  backdrop-filter: saturate(180%) blur(20px);
   background: rgba(231, 231, 231, 0.226);
 }
 
@@ -205,19 +171,19 @@
 }
 
 .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box {
-  backdrop-filter: blur(10px);
+  backdrop-filter: saturate(180%) blur(20px);
   background: #6d6d6d3a;
   border-radius: unset;
 }
 
 [data-balloon]:after {
-  backdrop-filter: blur(10px);
+  backdrop-filter: saturate(180%) blur(20px);
   background: #6d6d6d3a;
   border-radius: unset;
 }
 
 .ant-drawer-content {
-  backdrop-filter: blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
   background: rgba(255, 255, 255, 0.226);
 }
 
@@ -240,7 +206,7 @@
 }
 
 .dplayer-notice {
-  backdrop-filter: blur(10px);
+  backdrop-filter: saturate(180%) blur(20px);
   background: #6d6d6d3a;
 }
 
@@ -258,7 +224,7 @@
 }
 
 .ant-notification-notice.ant-notification-notice-closable {
-  backdrop-filter: blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
   background-color: rgba(230, 230, 230, 0.3);
 }
 
@@ -286,7 +252,7 @@
 }
 
 .ant-select-dropdown {
-  backdrop-filter: blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
   background-color: rgba(230, 230, 230, 0.3);
   box-shadow: unset;
   -webkit-box-shadow: unset;

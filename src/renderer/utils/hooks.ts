@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
+import { init } from '@/api/leancloud';
+import { initStore, localStore } from '.';
 
 export const useWindowResize = function() {
   const getSize = () => ({
@@ -42,7 +44,9 @@ export const useNetWork = function(): NetWork {
 export const useTitle = function(t: string): void {
   useEffect(() => {
     document.getElementById('app-title')!.innerText = t;
-  }, [t]);
+  }, []);
 };
 
-// export const use
+export const useInitLeanCloud = function() {
+  useEffect(init, []);
+};

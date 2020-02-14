@@ -1,12 +1,11 @@
-import React, { FC, useReducer } from 'react';
+import React, { FC } from 'react';
 import ClickDown from '../ClickDown';
-import './index.css';
 import { RIcon } from '..';
+import { NavLink } from 'react-router-dom';
 
 const DragAppBar: FC<any> = function(props) {
-  const { onClose, onMini, title } = props;
+  const { onClose, onMini } = props;
   const isNight = new Date().getHours() > 18;
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
 
   return (
     <div
@@ -20,13 +19,32 @@ const DragAppBar: FC<any> = function(props) {
           background: `url(${
             isNight ? require('../../assets/night.gif') : require('../../assets/day.gif')
           }) no-repeat center/cover`,
-          backgroundPositionY: '70%',
+          backgroundPositionY: '68%',
           textAlign: 'center'
         } as any
       }
     >
-      <span id="app-title">{document.title}</span>
-      <div style={{ display: 'inline-block', position: 'absolute', right: 5, top: 1 }}>
+      <span id="app-title" style={{ lineHeight: '20px' }}>
+        {document.title}
+      </span>
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          position: 'absolute',
+          right: 5,
+          height: '20px'
+        }}
+      >
+        <ClickDown>
+          <NavLink to="/setting" style={{ display: 'inline-flex' }}>
+            <RIcon
+              src={require('../../assets/setting.svg')}
+              size={[16, 16]}
+              style={{ marginRight: 10, WebkitAppRegion: 'no-drag' }}
+            />
+          </NavLink>
+        </ClickDown>
         {!!onMini ? (
           <ClickDown>
             <RIcon
