@@ -16,3 +16,5 @@ export { default as Loading } from './Loading';
 export { default as DragAppBar } from './DragAppBar';
 export { default as UpdateList } from './UpdateList';
 export { default as Center } from './Center';
+export * from './ElectronLink';
+export * from './List';

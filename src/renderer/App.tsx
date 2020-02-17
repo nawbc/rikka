@@ -2,7 +2,7 @@ import { MenuDrawer, Splash, Search, DragAppBar, CheckNetwork, HomeButton } from
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import React, { useState, FC, useLayoutEffect } from 'react';
 import CacheRoute from 'react-router-cache-route';
-import { localStore, initStore, useInitLeanCloud } from './utils';
+import { localStore, initStore } from './utils';
 import { Modal, Icon, Checkbox } from 'antd';
 import { hot } from 'react-hot-loader/root';
 import { ipcRenderer } from 'electron';
@@ -10,7 +10,7 @@ import { routes } from './router';
 import './stylesheet/index.css';
 
 export const APP_MAIN_TITLE = '邪王真眼 --- 爆裂吧，番剧！ 粉碎吧，精神, 放逐这个世界！';
-const SPLASH_DURATION = 3000;
+const SPLASH_DURATION = 1000;
 export const ctx = React.createContext({
   theme: 'light',
   title: document.title
@@ -53,9 +53,6 @@ const App: FC = () => {
   const [isDisplaySplash, setDisplaySplash] = useState(true);
   const [inProp, setInProp] = useState(true);
   const splashItem = localStore.get('setting.splash');
-
-  // 初始化leancloud服务
-  useInitLeanCloud();
 
   useLayoutEffect(() => {
     initStore();

@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
-import { Row, Col, Slider, Modal, Button } from "antd";
-import { localStore } from "@/utils";
+import React, { FC, useState } from 'react';
+import { Row, Col, Slider, Modal, Button } from 'antd';
+import { localStore } from '@/utils';
 
 interface OtherDownloadOptions {
   onOpen: (e?: any) => void;
@@ -9,8 +9,8 @@ interface OtherDownloadOptions {
 }
 
 export const OtherDownloadOptions: FC<OtherDownloadOptions> = function(props) {
-  const tCount = localStore.get("setting.threadCount");
-  const pCount = localStore.get("setting.parallelCount");
+  const tCount = localStore.get('setting.threadCount');
+  const pCount = localStore.get('setting.parallelCount');
   const [threadCount, setThreadCount] = useState(tCount);
   const [downCount, setDownCount] = useState(pCount);
   const { onOpen, visible, onClose } = props;
@@ -20,11 +20,11 @@ export const OtherDownloadOptions: FC<OtherDownloadOptions> = function(props) {
       <div
         onClick={onOpen}
         style={{
-          width: "100%",
-          height: "100%"
+          width: '100%',
+          height: '100%'
         }}
       >
-        其他
+        速度调整
       </div>
       <Modal
         title="其他设置"
@@ -52,7 +52,7 @@ export const OtherDownloadOptions: FC<OtherDownloadOptions> = function(props) {
                 max={10}
                 onChange={value => {
                   setThreadCount(value as number);
-                  localStore.set("setting.threadCount", value);
+                  localStore.set('setting.threadCount', value);
                 }}
                 value={parseInt(threadCount as string)}
               />
@@ -60,7 +60,7 @@ export const OtherDownloadOptions: FC<OtherDownloadOptions> = function(props) {
             <Col
               span={2}
               style={{
-                textAlign: "center"
+                textAlign: 'center'
               }}
             >
               <span>{threadCount}</span>
@@ -76,7 +76,7 @@ export const OtherDownloadOptions: FC<OtherDownloadOptions> = function(props) {
                 max={3}
                 onChange={value => {
                   setDownCount(value as number);
-                  localStore.set("setting.parallelCount", value);
+                  localStore.set('setting.parallelCount', value);
                 }}
                 value={parseInt(downCount as string)}
               />
@@ -84,7 +84,7 @@ export const OtherDownloadOptions: FC<OtherDownloadOptions> = function(props) {
             <Col
               span={2}
               style={{
-                textAlign: "center"
+                textAlign: 'center'
               }}
             >
               <span>{downCount}</span>

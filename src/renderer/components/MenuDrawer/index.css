@@ -7,4 +7,113 @@
 .rikka-logo:hover {
   transform: scale(1.02);
 }
-  
+
+.draw-box .ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border: 0;
+}
+
+.draw-box .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background: unset;
+}
+
+.draw-box .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected::after {
+  border-right: none;
+}
+
+.draw-box .ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: none;
+}
+
+.draw-box .ant-drawer-content-wrapper {
+  user-select: none;
+}
+
+.draw-box .ant-drawer-mask {
+  background: unset;
+}
+
+.ant-menu-item-selected a {
+  color: var(--gg);
+}
+
+.draw-box .ant-menu-item-selected {
+  color: var(--pp);
+}
+
+.draw-box .ant-menu-item > a {
+  color: var(--bd);
+}
+
+.draw-box .ant-menu-submenu-selected {
+  color: var(--pp);
+}
+
+.draw-box .ant-menu-item:hover,
+.ant-menu-item-active,
+.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+.ant-menu-submenu-active,
+.ant-menu-submenu-title:hover {
+  color: var(--gg);
+}
+
+.draw-box .ant-menu-item:hover,
+.ant-menu-item-active,
+.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+.ant-menu-submenu-active,
+.ant-menu-submenu-title:hover {
+  color: var(--gg);
+}
+
+.ant-menu-item:hover,
+.ant-menu-item-active,
+.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+.ant-menu-submenu-active,
+.draw-box .ant-menu-submenu-title:hover {
+  color: var(--gg);
+}
+
+.draw-box .ant-menu-item > a:hover {
+  color: var(--gg);
+}
+
+.draw-box .ant-switch-checked {
+  background: var(--pp);
+}
+
+.ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.draw-box .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.draw-box .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before {
+  background: var(--gg);
+}
+
+.ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.draw-box .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after,
+.ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.draw-box .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before {
+  background: var(--gg);
+}
+
+.draw-box .ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: unset;
+}
+.draw-box .ant-menu-item:active,
+.ant-menu-submenu-title:active {
+  background-color: unset;
+}

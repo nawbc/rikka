@@ -40,6 +40,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
         </ClickDown>
       </div>
       <Drawer
+        className="draw-box"
         width={300}
         placement="left"
         closable={false}
@@ -56,9 +57,13 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
           mode="inline"
         >
           {/* 下载 */}
-          <Menu.Item key="1">{<NavLink to="/download">下载</NavLink>}</Menu.Item>
+          <Menu.Item key="1">
+            <NavLink to="/download">下载</NavLink>
+          </Menu.Item>
           {/* 关于 */}
-          <Menu.Item key="2">关于</Menu.Item>
+          <Menu.Item key="2">
+            <NavLink to="/about">关于</NavLink>
+          </Menu.Item>
           {/*设置*/}
           <SubMenu
             key="setting"
@@ -80,8 +85,8 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
               <Switch
                 size="small"
                 onClick={() => {
-                  forceUpdate();
                   localStore.set('setting.splash', !localStore.get('setting.splash'));
+                  forceUpdate();
                 }}
                 checked={localStore.get('setting.splash')}
               />
@@ -132,20 +137,8 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                 />
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="8">全部设置</Menu.Item>
-            <Menu.Item
-              key="7"
-              onClick={() => {
-                localStore.clear();
-                initStore();
-                notification.open({
-                  message: '',
-                  description: '设置已重置'
-                });
-                forceUpdate();
-              }}
-            >
-              重置
+            <Menu.Item key="8">
+              <NavLink to="/setting">全部设置</NavLink>
             </Menu.Item>
           </SubMenu>
         </Menu>

@@ -19,12 +19,12 @@ const DragAppBar: FC<any> = function(props) {
           background: `url(${
             isNight ? require('../../assets/night.gif') : require('../../assets/day.gif')
           }) no-repeat center/cover`,
-          backgroundPositionY: '68%',
+          backgroundPositionY: isNight ? '67%' : '45%',
           textAlign: 'center'
         } as any
       }
     >
-      <span id="app-title" style={{ lineHeight: '20px' }}>
+      <span id="app-title" style={{ lineHeight: '20px', color: '#e8e8e8' }}>
         {document.title}
       </span>
       <div

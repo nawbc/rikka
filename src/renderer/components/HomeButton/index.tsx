@@ -9,7 +9,8 @@ const HomeButton: FC<any> = function(props) {
       style={{
         position: 'fixed',
         right: '30px',
-        bottom: '25px'
+        bottom: '25px',
+        zIndex: 999
       }}
     >
       <NavLink to="/" draggable={false}>

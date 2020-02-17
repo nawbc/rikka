@@ -57,6 +57,10 @@ const schema: any = {
   user: {
     type: 'object',
     properties: {
+      isSigned: {
+        type: 'boolean',
+        default: false
+      },
       history: {
         type: 'array',
         default: []

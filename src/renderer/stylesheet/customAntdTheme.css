@@ -1,7 +1,7 @@
 /* checkbox */
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #3d30f0;
-  border-color: #3d30f0;
+  background-color: var(--pb);
+  border-color: var(--pb);
 }
 
 /* 对话框 */
@@ -16,7 +16,7 @@
 
 .ant-modal-confirm-warning .ant-modal-confirm-body > .anticon,
 .ant-modal-confirm-confirm .ant-modal-confirm-body > .anticon {
-  color: #afafaf;
+  color: var(--gg);
 }
 
 .ant-modal-header {
@@ -32,70 +32,10 @@
   padding-top: 10px;
 }
 
-/* 抽屉 菜单 */
-.ant-menu-inline,
-.ant-menu-vertical,
-.ant-menu-vertical-left {
-  border: 0;
-}
-
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background: unset;
-  color: #001fcf;
-}
-
-.ant-menu-submenu-selected {
-  color: rgba(0, 0, 0, 0.65);
-}
-
-.ant-menu-item:hover,
-.ant-menu-item-active,
-.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
-.ant-menu-submenu-active,
-.ant-menu-submenu-title:hover {
-  color: #3d30f0;
-}
-
-.ant-menu-submenu-selected {
-  color: #3d30f0;
-}
-
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected::after {
-  border-right: none;
-}
-
-.ant-menu-vertical .ant-menu-item::after,
-.ant-menu-vertical-left .ant-menu-item::after,
-.ant-menu-vertical-right .ant-menu-item::after,
-.ant-menu-inline .ant-menu-item::after {
-  border-right: none;
-}
-
-.ant-menu-item-selected > a,
-.ant-menu-item-selected > a:hover {
-  color: inherit;
-}
-
-.ant-menu-item > a:hover {
-  color: #3d30f0;
-}
-
-.ant-drawer-content-wrapper {
-  user-select: none;
-}
-
-.ant-drawer-mask {
-  background: unset;
-}
-
-/* .ant-drawer {
-  z-index: 100000;
-}
-
 */
 /* 按钮 */
 .ant-btn.ant-btn-link {
-  color: #001fcf;
+  color: var(--pd);
 }
 
 .ant-btn-sm {
@@ -135,24 +75,24 @@
 /* slider */
 
 .ant-slider-handle {
-  border-color: #3d30f0;
+  border-color: var(--pb);
   border-radius: unset;
 }
 
 .ant-slider-handle:focus {
-  border-color: #001fcfd7;
+  border-color: var(--pd) d7;
 }
 
 .ant-slider-track {
-  background-color: #695ff7;
+  background-color: #686868;
 }
 
 .ant-slider:hover .ant-slider-track {
-  background-color: #001fcfd7;
+  background-color: var(--pd) d7;
 }
 
 .ant-slider-handle.ant-tooltip-open {
-  border-color: #001fcfd7;
+  border-color: var(--pd) d7;
 }
 
 /* tooltips */
@@ -197,7 +137,7 @@
 }
 
 /* .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box span {
-  color: #3d30f0;
+  color: var(--pb);
 } */
 
 .ant-input-group > .ant-input:first-child,

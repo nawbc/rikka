@@ -1,0 +1,4 @@
+.electron-link:hover {
+  color: var(--gg);
+  cursor: pointer;
+}

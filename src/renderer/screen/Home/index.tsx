@@ -5,6 +5,7 @@ import { useWindowResize, changeTitle } from '@/utils';
 import { Comic } from './Fragment/Comic';
 import { Main } from './Fragment/Main';
 import { Movie } from './Fragment/Movie';
+import { User } from './Fragment/User';
 import './index.css';
 
 const { TabPane } = Tabs;
@@ -32,7 +33,7 @@ const Home = function() {
             changeTitle('电视剧');
             break;
           case '5':
-            changeTitle('我');
+            changeTitle('账户');
             break;
         }
       }}
@@ -47,7 +48,9 @@ const Home = function() {
         <Movie />
       </TabPane>
       <TabPane tab="现实" key="4" style={{ width, height }} forceRender />
-      <TabPane tab="吾王" key="5" style={{ width, height }} forceRender />
+      <TabPane tab="吾王" key="5" style={{ width, height }} forceRender>
+        <User />
+      </TabPane>
     </Tabs>
   );
 };

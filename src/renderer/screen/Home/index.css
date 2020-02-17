@@ -9,16 +9,16 @@
 }
 
 .main-tabs .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
-  background: #3d30f0;
-  height: 50%;
-  opacity: 0.2;
+  background: var(--pd);
+  height: 25%;
+  opacity: 0.4;
 }
 .main-tabs .ant-tabs-nav .ant-tabs-tab-active {
-  color: #3d30f0;
+  color: var(--pd);
 }
 
 .main-tabs .ant-tabs-nav .ant-tabs-tab:hover {
-  color: #3d30f0;
+  color: var(--pd);
 }
 
 .main-tabs .ant-tabs-nav-container {

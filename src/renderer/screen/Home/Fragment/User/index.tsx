@@ -1,20 +1,29 @@
-import React, { FC, useReducer } from 'react';
-import { useTitle, useWindowResize, localStore, initStore } from '@/utils';
-import { List, notification } from 'antd';
-import { ScrollBar, MainButton } from '@/components';
-import './index.css';
+import React, { FC, useReducer, useMemo, useState } from 'react';
+import { localStore } from '@/utils';
+import AV from 'leancloud-storage';
+import { Signed } from './Signed';
+import { UnSigned } from './UnSigned';
 
-const Setting: FC = function() {
+export const User: FC = function() {
+  const [] = useReducer(x => x + 1, 0);
+  const [] = useState('');
+  // const [] = useState('');
+
+  const currentUser = AV.User.current();
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const { width, height } = useWindowResize();
 
-  useTitle('设置');
-
+  console.log(currentUser);
   return (
-    <div style={{ width, height }}>
-      <ScrollBar>span</ScrollBar>
+    <div style={{ width: '100%', height: '100%' }}>
+      {currentUser ? (
+        <Signed />
+      ) : (
+        <UnSigned
+          onLogin={user => {
+            forceUpdate();
+          }}
+        />
+      )}
     </div>
   );
 };
-
-export default Setting;

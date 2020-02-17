@@ -6,13 +6,18 @@
 body {
   user-select: none;
   overflow: hidden;
+  color: #242424;
 }
 
 :root {
-  --violet_dark: #222244;
-  --violet_light: #2d2b55;
-  --violet_a: #7457ff;
-  --violet_s1: #7457ff;
-  --violet_s2: #7457ff;
-  --violet_s3: #7457ff;
+  --pd: #2a2e96;
+  --pl: #2a2e96;
+  --pll: #31459a;
+  --pp: #4857a4;
+  --pb: #1d2087;
+  --gg: #afafaf;
+  --bl: #000000db;
+  --bd: #000;
+  --bll: #333333de;
+  --antd-wave-shadow-color: #5168ce;
 }

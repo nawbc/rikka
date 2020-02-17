@@ -2,11 +2,11 @@ import React, { FC, useState, useRef } from 'react';
 import MainButton from '../MainButton';
 import { AutoComplete } from 'antd';
 import { RIcon } from '..';
-import './index.css';
 import { createSearch } from '@/api/halihali';
 import { SearchListData } from '@/api/halihali/halihali.interface';
 import { remote, ipcRenderer } from 'electron';
 const { Option } = AutoComplete as any;
+import './index.css';
 
 const dataToEleList = (data: SearchListData[]) =>
   data.map((item, index) => (
@@ -43,16 +43,7 @@ const Search: FC<any> = function(props) {
           }}
         />
       ) : null}
-      <div
-        className="search-box"
-        style={{
-          position: 'fixed',
-          bottom: 25,
-          right: 85,
-          display: 'inline-flex',
-          alignItems: 'flex-end'
-        }}
-      >
+      <div className="search-box">
         <MainButton
           className="search-button"
           onClick={() => {

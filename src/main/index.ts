@@ -1,5 +1,5 @@
 import { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage, remote } from 'electron';
-import { resolve } from 'path';
+import { resolve, basename } from 'path';
 
 /**
  * Set `__static` path to static files in production
@@ -13,6 +13,16 @@ if (process.env.NODE_ENV !== 'development') {
 
 let mainWindow: BrowserWindow | null;
 let tray: Tray;
+const execProgramName = basename(process.execPath);
+
+const setAutoLogin = (isAuto = false) => {
+  app.setLoginItemSettings({
+    openAtLogin: isAuto,
+    openAsHidden: true,
+    path: process.execPath,
+    args: ['--processStart', `"${execProgramName}"`]
+  });
+};
 
 const winURL =
   process.env.NODE_ENV === 'development'
@@ -50,6 +60,15 @@ function createWindow() {
 
   ipcMain.on('direct-close', () => {
     mainWindow!.destroy();
+  });
+
+  ipcMain.on('openAutoLogin', () => {
+    console.log(1111);
+    setAutoLogin(true);
+  });
+
+  ipcMain.on('closeAutoLogin', () => {
+    setAutoLogin(false);
   });
 
   mainWindow.on('closed', () => {
@@ -92,6 +111,8 @@ function createWindow() {
 }
 
 app.on('ready', createWindow);
+
+setAutoLogin(false);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

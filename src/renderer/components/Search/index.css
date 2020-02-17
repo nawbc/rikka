@@ -3,9 +3,8 @@
   width: 34px;
   height: 34px;
   margin-right: 5px;
-  background-color: #000000db;
-  box-shadow: 1px 1px 8px #5c5c5cd9;
-  z-index: 2000;
+  background-color: var(--bl);
+  box-shadow: 1px 1px 8px var(--bll);
 }
 
 .search-button::before {
@@ -31,8 +30,17 @@
 }
 
 .search-button:active {
-  background-color: #000;
-  box-shadow: 0 2px 25px #5c5c5cd9;
+  background-color: var(--bd);
+  box-shadow: 0 2px 25px var(--bl);
+}
+
+.search-box {
+  position: fixed;
+  bottom: 25px;
+  right: 85px;
+  display: inline-flex;
+  align-items: flex-end;
+  z-index: 999;
 }
 
 .search-box .ant-input {

@@ -3,6 +3,7 @@
   padding: 5px;
   background-color: #bdbdbdde;
   box-shadow: 1px 1px 8px #a8a8a8d9;
+  margin-top: 50px;
 }
 
 .reset-button::before {
