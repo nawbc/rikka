@@ -1,5 +1,6 @@
-import { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage, remote } from 'electron';
+import { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage } from 'electron';
 import { resolve, basename } from 'path';
+import { handleUpdate } from './update';
 
 /**
  * Set `__static` path to static files in production
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV !== 'development') {
 let mainWindow: BrowserWindow | null;
 let tray: Tray;
 const execProgramName = basename(process.execPath);
+const updateUrl = process.env.NODE_ENV === 'development' ? 'http://localhost' : '';
 
 const setAutoLogin = (isAuto = false) => {
   app.setLoginItemSettings({
@@ -63,7 +65,6 @@ function createWindow() {
   });
 
   ipcMain.on('openAutoLogin', () => {
-    console.log(1111);
     setAutoLogin(true);
   });
 
@@ -81,6 +82,9 @@ function createWindow() {
     mainWindow!.setSkipTaskbar(true);
     event.preventDefault();
   });
+
+  // 检查自动更新
+  handleUpdate(mainWindow, updateUrl);
 
   const iconPath = resolve(__dirname, '../../static/icons/tray.png');
   const trayIcon = nativeImage.createFromPath(iconPath);
@@ -125,22 +129,4 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
-});
-
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install `electron-updater` to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-import { autoUpdater } from 'electron-updater';
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall();
-});
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates();
 });

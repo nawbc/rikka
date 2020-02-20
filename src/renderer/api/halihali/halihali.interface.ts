@@ -3,7 +3,7 @@
  */
 
 export interface RequestHaliHali {
-  action?: string; // acg 动漫　tv电视剧
+  action?: any; // acg  tv  mov
   page?: number; // 页数
   year?: number | string; // 年代
   area?: string; // 地区

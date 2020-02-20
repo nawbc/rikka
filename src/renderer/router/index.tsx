@@ -6,7 +6,7 @@ import Setting from '@/screen/Setting';
 // import SearchResult from '@/screen/SearchResult';
 import Play from '@/screen/Play';
 import { About } from '@/screen/About';
-import Test from '@/screen/Test';
+import Ads from '@/screen/Ads';
 
 export const routes: any[] = [
   {
@@ -24,10 +24,10 @@ export const routes: any[] = [
     path: '/play/:type/:id/:name',
     component: Play
   },
-  // {
-  //   path: '/result',
-  //   component: SearchResult
-  // },
+  {
+    path: '/result',
+    component: About
+  },
   {
     path: '/about',
     component: About
@@ -39,7 +39,7 @@ export const routes: any[] = [
     cache: true
   },
   {
-    path: '/test',
-    component: Test
+    path: '/ads',
+    component: Ads
   }
 ];

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, HTMLAttributes } from 'react';
 import { ipcRenderer } from 'electron';
 import ClickDown from '../ClickDown';
 import { UpdateCollections } from '@/api/halihali/halihali.interface';
@@ -6,7 +6,7 @@ import { Tabs, List } from 'antd';
 import { ScrollBar } from '..';
 import './index.css';
 
-interface UpdateLisProp {
+interface UpdateLisProp extends HTMLAttributes<any> {
   lists: UpdateCollections;
 }
 
@@ -32,16 +32,23 @@ const displayDay = (index: number) => {
 };
 
 const UpdateList: FC<UpdateLisProp> = function(props) {
-  const { lists } = props;
-  const today = new Date().getDay() - 1;
+  const { lists, ...rest } = props;
+  const today = new Date().getDay();
+  const [pane, setPane] = useState(today.toString());
+
   return (
-    <div
-      style={{ width: 300, height: 400, display: 'inline-block', position: 'absolute', right: 60 }}
-    >
-      <Tabs tabPosition="right" className="update-table">
+    <div {...rest}>
+      <Tabs
+        tabPosition="right"
+        className="update-table"
+        activeKey={pane}
+        onChange={key => {
+          setPane(key);
+        }}
+      >
         {lists.map((val, index) => {
           return (
-            <TabPane tab={displayDay(index)} key={index.toString()}>
+            <TabPane tab={displayDay(index)} key={index.toString()} forceRender>
               <ScrollBar style={{ height: 400 }}>
                 <List
                   style={{ height: 300 }}

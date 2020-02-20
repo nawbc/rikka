@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import { Card, Nav, Foot, ScrollBar } from '@/components';
+import { Card, FilterNav, Foot, ScrollBar } from '@/components';
 import { createComic, Areas, ComicKind, Years } from '@/api/halihali';
 import { VideoListData } from '@/api/halihali/halihali.interface';
 import { Pagination } from 'antd';
@@ -14,7 +14,7 @@ export const Comic: FC = function() {
 
   useEffect(() => {
     createComic({ action: 'acg', dect: '', id: '', page, year, area, kind }).then(val => {
-      setCards(val);
+      setCards(val as any);
     });
   }, [page, area, kind, year]);
 
@@ -22,17 +22,13 @@ export const Comic: FC = function() {
     <ScrollBar>
       <div
         style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-around',
           position: 'relative',
           marginTop: '40px',
           padding: '0 20px'
         }}
       >
-        <Nav
+        <FilterNav
+          style={{ position: 'absolute', right: 25, top: 0 }}
           mainKind={ComicKind}
           onYear={num => {
             setYear(num);
@@ -47,19 +43,32 @@ export const Comic: FC = function() {
           area={area}
           kind={kind}
         />
-        {!!cards && cards.length !== 0
-          ? cards.map((val, index) => {
-              return (
-                <Card
-                  key={index}
-                  imgSrc={val.thumbUrl}
-                  url={val.url}
-                  videoName={val.title}
-                  subTitle={val.episode}
-                />
-              );
-            })
-          : null}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            flexWrap: 'wrap'
+          }}
+        >
+          {!!cards && cards.length !== 0
+            ? cards.map((val, index) => {
+                return (
+                  <Card
+                    key={index}
+                    imgSrc={val.thumbUrl}
+                    url={val.url}
+                    videoName={val.title}
+                    subTitle={val.episode}
+                    style={{ margin: '50px 15px 0 15px' }}
+                    onImgLoadError={e => {
+                      const errorTarget = e.target as HTMLImageElement;
+                      errorTarget.src = require('../../../../assets/error_img.jpg');
+                    }}
+                  />
+                );
+              })
+            : null}
+        </div>
         <Pagination
           defaultCurrent={1}
           total={3240}

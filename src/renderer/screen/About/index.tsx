@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Avatar, Row, Col, Modal } from 'antd';
 import { RIcon, ScrollBar, ListItem, ElectronLink, List, ClickDown } from '@/components';
-import { useWindowResize } from '@/utils';
+import { useWindowResize, useTitle } from '@/utils';
 import Package from '../../../../package.json';
 import './index.css';
 import { BrowserWindowProxy } from 'electron';
@@ -24,7 +24,7 @@ const Item: FC<any> = function(props) {
 
 export const About: FC = function(props) {
   const { width, height } = useWindowResize();
-
+  useTitle('关于');
   return (
     <div
       style={{
@@ -43,14 +43,14 @@ export const About: FC = function(props) {
                 style={{
                   paddingLeft: 30,
                   justifyContent: 'space-around',
-                  height: 150,
+                  height: 200,
                   display: 'flex',
                   flexDirection: 'column'
                 }}
               >
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/my.svg')} size={[16, 16]} />
+                    <RIcon src={require('../../assets/user-line.svg')} size={[20, 20]} />
                     &nbsp;&nbsp;
                     <span>作者</span>
                   </div>
@@ -66,7 +66,7 @@ export const About: FC = function(props) {
                 </Item>
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/qq.svg')} size={[20, 20]} />
+                    <RIcon src={require('../../assets/mail-line.svg')} size={[20, 20]} />
                     &nbsp;&nbsp;
                     <span>邮箱</span>
                   </div>
@@ -83,6 +83,22 @@ export const About: FC = function(props) {
                   <ElectronLink href="https://github.com/dark-flame-bricker">
                     访问 dark-flame-bricker
                   </ElectronLink>
+                </Item>
+                <Item>
+                  <div>
+                    <RIcon src={require('../../assets/calculator-line.svg')} size={[20, 20]} />
+                    &nbsp;&nbsp;
+                    <span>软件名</span>
+                  </div>
+                  <span>邪王真眼最强 视频客户端</span>
+                </Item>
+                <Item>
+                  <div>
+                    <RIcon src={require('../../assets/award-line.svg')} size={[20, 20]} />
+                    &nbsp;&nbsp;
+                    <span>开源协议</span>
+                  </div>
+                  <span>{pkg.license}</span>
                 </Item>
               </div>
             </Col>
@@ -126,9 +142,6 @@ export const About: FC = function(props) {
                           okText: '关闭',
                           cancelText: ' ',
                           icon: ''
-
-                          // onOk() {},
-                          // onCancel() {}
                         });
                       }}
                     />
@@ -139,7 +152,18 @@ export const About: FC = function(props) {
           </List>
           <br />
           <br />
-          <h2>捐赠</h2>
+          <h3>捐赠</h3>
+          <br />
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
+            <img
+              src={require('../../assets/pay/alipay.jpg')}
+              style={{ width: 260, padding: '10px', background: '#eee', borderRadius: '10px' }}
+            />
+            <img
+              src={require('../../assets/pay/wechat.jpg')}
+              style={{ width: 260, padding: '10px', background: '#eee', borderRadius: '10px' }}
+            />
+          </div>
         </div>
       </ScrollBar>
     </div>

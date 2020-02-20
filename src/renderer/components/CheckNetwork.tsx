@@ -1,28 +1,27 @@
 import React, { FC, useEffect } from 'react';
-import { notification } from 'antd';
 import { useNetWork } from '@/utils';
 
-notification.config({
-  duration: 2.5,
-  top: 50
-});
+// notification.config({
+//   duration: 2.5,
+//   top: 50
+// });
 
-const CheckNetwork: FC<any> = function(props) {
+interface CheckNetwork {
+  onDisconnect: () => void;
+  onChargeNetwork?: () => void;
+}
+
+const CheckNetwork: FC<CheckNetwork> = function(props) {
+  const { onDisconnect, onChargeNetwork } = props;
   const network = useNetWork();
 
   useEffect(() => {
     if (network.isOnline) {
       if (network.effectiveType === '4g') {
-        notification.open({
-          message: '',
-          description: '正在使用计费网络, 注意补魔'
-        });
+        !!onChargeNetwork && onChargeNetwork();
       }
     } else {
-      notification.open({
-        message: '',
-        description: '网络 未与君产生共鸣'
-      });
+      onDisconnect();
     }
   }, [network.isOnline]);
 

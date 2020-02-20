@@ -63,9 +63,9 @@ const Play: FC<any> = function(props) {
       })
       .catch(err => {
         notification.open({
-          message: '',
+          message: '错误',
           description: '视频获取错误, 请尝试切换视频源',
-          duration: 3000
+          duration: 4
         });
         log.error(err);
       });

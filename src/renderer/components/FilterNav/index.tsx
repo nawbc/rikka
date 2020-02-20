@@ -1,4 +1,4 @@
-import React, { FC, useState, useReducer } from 'react';
+import React, { FC, useState, useReducer, HTMLAttributes } from 'react';
 import { Areas, Years } from '@/api/halihali';
 import { Row, Col, Drawer } from 'antd';
 import { ClickDown } from '../';
@@ -8,7 +8,7 @@ import './index.css';
 
 type MainKind = typeof ComicKind | typeof MovieKind | typeof SeriesKind;
 
-interface NavProp {
+interface NavProp extends HTMLAttributes<any> {
   onYear: (year: number) => void;
   onArea: (area: string) => void;
   onKind: (kind: number) => void;
@@ -19,7 +19,7 @@ interface NavProp {
 }
 
 const Nav: FC<NavProp> = function(props) {
-  const { kind, onArea, onKind, onYear, year, area, mainKind } = props;
+  const { kind, onArea, onKind, onYear, year, area, mainKind, ...rest } = props;
   const [display, setDisplay] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const block = (k: object, type: string) =>
@@ -64,12 +64,7 @@ const Nav: FC<NavProp> = function(props) {
   return (
     <>
       <div
-        style={{
-          position: 'absolute',
-          top: '0px',
-          right: '20px',
-          zIndex: 999
-        }}
+        {...rest}
         onClick={() => {
           setDisplay(true);
         }}

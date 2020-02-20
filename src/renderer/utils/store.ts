@@ -51,6 +51,30 @@ const schema: any = {
       isExitDirectly: {
         type: 'boolean',
         default: false
+      },
+      isNotificationSound: {
+        type: 'boolean',
+        default: true
+      },
+      forkNotification: {
+        type: 'boolean',
+        default: true
+      },
+      isPromptTone: {
+        type: 'boolean',
+        default: true
+      },
+      promptTone: {
+        type: 'string',
+        default: 'normal.mp3'
+      },
+      isAutoUpdate: {
+        type: 'boolean',
+        default: false
+      },
+      isPromptUpdate: {
+        type: 'boolean',
+        default: true
       }
     }
   },

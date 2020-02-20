@@ -3,9 +3,9 @@
  * @author Florin Pop {@see https://codepen.io/FlorinPop17/pen/vPKWjd}
  */
 
-import React, { FC, useReducer, useMemo, useState, useRef } from 'react';
-import { useTitle, useWindowResize, is } from '@/utils';
-import { ScrollBar, RIcon } from '@/components';
+import React, { FC, useState, useRef } from 'react';
+import { useWindowResize, is } from '@/utils';
+import { RIcon } from '@/components';
 import AV from 'leancloud-storage';
 import { notification } from 'antd';
 import './unsigned.css';
@@ -18,7 +18,7 @@ const localCheckSuitable = (email: string, passwd: string, username?: string) =>
   const isEmail = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/.test(email);
   if (!isEmail) {
     notification.open({
-      message: '',
+      message: '错误',
       description: '邮箱格式错误'
     });
     return false;
@@ -26,7 +26,7 @@ const localCheckSuitable = (email: string, passwd: string, username?: string) =>
 
   if (passwd.length < 8) {
     notification.open({
-      message: '',
+      message: '错误',
       description: '密码最少8位'
     });
     return false;
@@ -34,7 +34,7 @@ const localCheckSuitable = (email: string, passwd: string, username?: string) =>
 
   if (!!username && username.length < 4) {
     notification.open({
-      message: '',
+      message: '错误',
       description: '用户名最少4个字符'
     });
     return false;
@@ -52,13 +52,13 @@ const register = (email: string, passwd: string, username: string, ref?: any) =>
   user.signUp().then(
     user => {
       notification.open({
-        message: '',
+        message: '信息',
         description: '注册成功。' + user.id + '请前去邮箱验证账户权限',
-        duration: 1000
+        duration: 2
       });
-      AV.User.requestEmailVerify(email).catch(err => {
+      AV.User.requestEmailVerify(email).catch(() => {
         notification.open({
-          message: '',
+          message: '错误',
           description: '邮箱验证发送错误， 请重试'
         });
       });
@@ -66,9 +66,9 @@ const register = (email: string, passwd: string, username: string, ref?: any) =>
     },
     error => {
       notification.open({
-        message: '',
+        message: '错误',
         description: error.toString(),
-        duration: 1000
+        duration: 2
       });
     }
   );
@@ -76,7 +76,6 @@ const register = (email: string, passwd: string, username: string, ref?: any) =>
 
 export const UnSigned: FC<UnsignedProp> = function(props) {
   const { onLogin } = props;
-  const { width, height } = useWindowResize();
   const ref = useRef(null);
   const [username, setUsername] = useState('');
   const [passwd, setPasswd] = useState('');
@@ -136,7 +135,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                 href="javascript:void(0)"
                 onClick={() => {
                   notification.open({
-                    message: '',
+                    message: '注意',
                     description: '暂不支持'
                   });
                 }}
@@ -147,7 +146,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                 href="javascript:void(0)"
                 onClick={() => {
                   notification.open({
-                    message: '',
+                    message: '注意',
                     description: '暂不支持'
                   });
                 }}
@@ -158,7 +157,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                 href="javascript:void(0)"
                 onClick={() => {
                   notification.open({
-                    message: '',
+                    message: '注意',
                     description: '暂不支持'
                   });
                 }}
@@ -193,7 +192,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                     .then(user => {
                       is.function(onLogin) && onLogin(user);
                       notification.open({
-                        message: '',
+                        message: '信息',
                         description: '登陆成功'
                       });
                     })
@@ -201,7 +200,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                       notification.open({
                         message: '',
                         description: '检查邮箱验证啊 哥' + error.toString(),
-                        duration: 1000
+                        duration: 2
                       });
                     });
                 }

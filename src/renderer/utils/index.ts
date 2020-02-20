@@ -63,9 +63,9 @@ export const randomNumber = (min: number, max: number): number =>
   min + Math.floor(Math.random() * (max - min)) + 1;
 
 let audioCanPlay = true;
-export const randomAudio = (arr: string[]) => {
+export const keepOneAudio = (sound: string[] | string) => {
   if (audioCanPlay) {
-    const soundPath = arr[randomNumber(0, arr.length - 1)];
+    const soundPath = Array.isArray(sound) ? sound[randomNumber(0, sound.length - 1)] : sound;
     const audio = new Audio(soundPath);
     audioCanPlay = false;
     audio.play();
@@ -82,3 +82,5 @@ export const changeTitle = function(t: string): void {
 export * from './hooks';
 
 export * from './store';
+
+export * from './setting';

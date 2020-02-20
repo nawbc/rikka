@@ -107,12 +107,6 @@
   background: var(--gg);
 }
 
-.draw-box .ant-menu-vertical .ant-menu-item::after,
-.ant-menu-vertical-left .ant-menu-item::after,
-.ant-menu-vertical-right .ant-menu-item::after,
-.ant-menu-inline .ant-menu-item::after {
-  border-right: unset;
-}
 .draw-box .ant-menu-item:active,
 .ant-menu-submenu-title:active {
   background-color: unset;

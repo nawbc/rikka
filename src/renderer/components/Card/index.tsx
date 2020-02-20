@@ -1,26 +1,26 @@
-import React, { FC, useState, ImgHTMLAttributes } from 'react';
-import './index.css';
-// import './card.css';
+import React, { FC, HTMLAttributes, SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
+import './index.css';
 
-export interface CardProps {
+export interface CardProps extends HTMLAttributes<any> {
   imgSrc?: string;
   url?: string;
   subTitle?: string;
   desc?: string;
   videoName?: string;
+  onImgLoadError?: (e: SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
 const Card: FC<CardProps> = function(props) {
-  const { imgSrc, videoName, url, subTitle, desc, ...rest } = props;
+  const { onImgLoadError, imgSrc, videoName, url, subTitle, desc, ...rest } = props;
 
   return (
     <div className="card" {...rest}>
       <img
         src={imgSrc}
         onError={e => {
-          const errorTarget = e.target as HTMLImageElement;
-          errorTarget.src = require('../../assets/error_img.jpg');
+          console.log(e);
+          !!onImgLoadError && onImgLoadError(e);
         }}
       />
       <div className="data">

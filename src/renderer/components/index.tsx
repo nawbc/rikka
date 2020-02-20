@@ -9,7 +9,7 @@ export { default as Search } from './Search';
 export { default as CheckNetwork } from './CheckNetwork';
 export { default as HomeButton } from './HomeButton';
 export { default as CollectionBlock } from './CollectionBlock';
-export { default as Nav } from './Nav';
+export { default as FilterNav } from './FilterNav';
 export { default as Foot } from './Foot';
 export { default as ClickDown } from './ClickDown';
 export { default as Loading } from './Loading';

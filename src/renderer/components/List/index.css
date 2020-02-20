@@ -11,10 +11,9 @@
 }
 
 .list-wrapper .list .list-right {
-  display: inline-block;
+  display: inline-flex;
 }
 
 .list-wrapper .list:hover {
   background-color: #eeeeee;
 }
-  

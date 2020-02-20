@@ -1,12 +1,12 @@
 {
   "name": "rikka",
-  "version": "0.0.1",
+  "version": "7.1.4",
   "author": {
     "name": "HanWang",
     "alias": "dark-flame-bricker",
     "email": "wanghan9423@outlook.com"
   },
-  "homepage": ".",
+  "homepage": "www.baidu.com",
   "repository": {
     "url": "https://github.com/dark-flame-bricker/rikka.git"
   },
@@ -23,11 +23,12 @@
     "lint:fix": "eslint --ext .ts,.tsx -f ./node_modules/eslint-friendly-formatter --fix src",
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-react/webpack.main.config.js",
-    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-react/webpack.renderer.config.js",
+    "pack:renderer": "cross-env NODE_ENV=production verwebpack --progress --colors --config .electron-react/webpack.renderer.config.js",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest -c jest.unit.config.js",
     "test:e2e": "npm run pack && jest -c jest.e2e.config.js",
-    "asar": " asar pack build/win-unpacked app.asar"
+    "asar": " asar pack build/win-unpacked app.asar",
+    "update-server": "node ./dev-update-srv.js"
   },
   "config": {
     "qq_group": "728414724",
@@ -36,7 +37,7 @@
   "publish": [
     {
       "provider": "generic",
-      "url": ""
+      "url": "http://localhost"
     }
   ],
   "build": {
@@ -71,10 +72,12 @@
       "uninstallerIcon": "static/icons/icon.ico"
     },
     "mac": {
-      "icon": "static/icons/icon.icns"
+      "icon": "static/icons/icon.icns",
+      "artifactName": "${name}-setup-${version}.${ext}"
     },
     "win": {
       "icon": "static/icons/icon.ico",
+      "artifactName": "${name}-setup-${version}.${ext}",
       "target": [
         "nsis"
       ]
@@ -165,6 +168,7 @@
     "html-webpack-plugin": "^3.2.0",
     "inject-loader": "^4.0.1",
     "jest": "^24.9.0",
+    "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^0.8.0",
     "multispinner": "^0.2.1",
     "node-loader": "^0.6.0",

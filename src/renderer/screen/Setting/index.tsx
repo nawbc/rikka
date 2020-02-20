@@ -1,21 +1,42 @@
-import React, { FC, useReducer, useState, useRef } from 'react';
-import { useTitle, useWindowResize, localStore, initStore } from '@/utils';
-import { notification, Divider, Checkbox, Switch, Icon, Radio, Tooltip } from 'antd';
+import React, { FC, useReducer, useRef } from 'react';
+import {
+  useTitle,
+  useWindowResize,
+  localStore,
+  initStore,
+  keepOneAudio,
+  IS_AUTO_LOGIN,
+  DOWNLOAD_POSITION,
+  SCREENSHOT_POSITION,
+  IS_NOTIFICATION_SOUND,
+  FORK_NOTIFICATION,
+  IS_PROMPT_TONE,
+  PROMPT_TONE,
+  IS_SPLASH,
+  IS_AUTOUPDATE
+} from '@/utils';
+import { notification, Switch, Radio, Tooltip, Select, Button } from 'antd';
 import { ScrollBar, MainButton, List, ListItem, RIcon, ClickDown } from '@/components';
 import { ipcRenderer, remote } from 'electron';
+import Package from '../../../../package.json';
 import './index.css';
 
 const { dialog } = remote;
+const pkg = Package as any;
+const { Option } = Select;
 
 const Setting: FC = function() {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { width, height } = useWindowResize();
-  const isAutoLogin = localStore.get('setting.isAutoLogin');
-  const parallelCount = localStore.get('setting.parallelCount');
-  const threadCount = localStore.get('setting.threadCount');
-  const downloadPosition = localStore.get('setting.downloadPosition');
-  const screenshotPosition = localStore.get('setting.screenshotPosition');
-  const isSplash = localStore.get('setting.splash');
+  const isAutoLogin = localStore.get(IS_AUTO_LOGIN);
+  const downloadPosition = localStore.get(DOWNLOAD_POSITION);
+  const screenshotPosition = localStore.get(SCREENSHOT_POSITION);
+  const isNotificationSound = localStore.get(IS_NOTIFICATION_SOUND);
+  const forkNotification = localStore.get(FORK_NOTIFICATION);
+  const isPromptTone = localStore.get(IS_PROMPT_TONE);
+  const promptTone = localStore.get(PROMPT_TONE);
+  const isSplash = localStore.get(IS_SPLASH);
+  const isAutoUpdate = localStore.get(IS_AUTOUPDATE);
   const downloadRef = useRef<any>(null);
   const screenshotRef = useRef<any>(null);
 
@@ -25,6 +46,7 @@ const Setting: FC = function() {
     <div style={{ width, height }}>
       <ScrollBar>
         <div style={{ maxWidth: '600px', margin: '60px auto' }}>
+          {/* 基本设置 */}
           <h3 style={{ marginBottom: 16 }}>基本设置</h3>
           <List>
             <ListItem
@@ -33,7 +55,7 @@ const Setting: FC = function() {
                 <Switch
                   size="small"
                   onClick={() => {
-                    localStore.set('setting.isAutoLogin', !isAutoLogin);
+                    localStore.set(IS_AUTO_LOGIN, !isAutoLogin);
                     isAutoLogin
                       ? ipcRenderer.send('closeAutoLogin')
                       : ipcRenderer.send('openAutoLogin');
@@ -49,7 +71,7 @@ const Setting: FC = function() {
                 <Switch
                   size="small"
                   onClick={() => {
-                    localStore.set('setting.splash', !isSplash);
+                    localStore.set(IS_SPLASH, !isSplash);
                     forceUpdate();
                   }}
                   checked={isSplash}
@@ -70,7 +92,7 @@ const Setting: FC = function() {
                   <RIcon
                     src={require('../../assets/dir.svg')}
                     size={[18, 18]}
-                    style={{ marginRight: '4px' }}
+                    style={{ marginRight: 4 }}
                     onClick={() => {
                       dialog
                         .showOpenDialog({
@@ -78,7 +100,7 @@ const Setting: FC = function() {
                         })
                         .then(info => {
                           const dirPath = info.filePaths;
-                          localStore.set('setting.screenshotPosition', dirPath[0]);
+                          localStore.set(SCREENSHOT_POSITION, dirPath[0]);
                           screenshotRef.current.innerText = dirPath;
                         });
                     }}
@@ -138,7 +160,7 @@ const Setting: FC = function() {
                         })
                         .then(info => {
                           const dirPath = info.filePaths;
-                          localStore.set('setting.downloadPosition', dirPath[0]);
+                          localStore.set(DOWNLOAD_POSITION, dirPath[0]);
                           downloadRef.current.innerText = dirPath;
                         });
                     }}
@@ -147,6 +169,7 @@ const Setting: FC = function() {
               }
             />
           </List>
+          {/* 消息通知 */}
           <h3 style={{ margin: '16px 0' }}>消息通知</h3>
           <List>
             <ListItem
@@ -155,9 +178,12 @@ const Setting: FC = function() {
                 <Switch
                   size="small"
                   onClick={() => {
-                    console.log(111);
+                    localStore.set(IS_NOTIFICATION_SOUND, !isNotificationSound);
+                    localStore.set(FORK_NOTIFICATION, !isNotificationSound);
+                    localStore.set(IS_PROMPT_TONE, !isNotificationSound);
+                    forceUpdate();
                   }}
-                  checked={true}
+                  checked={isNotificationSound}
                 />
               }
             />
@@ -166,50 +192,80 @@ const Setting: FC = function() {
               other={
                 <Switch
                   size="small"
+                  disabled={!isNotificationSound}
                   onClick={() => {
-                    console.log(111);
+                    localStore.set(FORK_NOTIFICATION, !forkNotification);
+                    forceUpdate();
                   }}
-                  checked={true}
+                  checked={forkNotification}
                 />
               }
             />
             <ListItem
-              prefixBlock="下载完成提示音"
+              prefixBlock={
+                <span>
+                  <span>提示音</span>
+                  &nbsp;&nbsp;&nbsp;
+                  <Select
+                    size="small"
+                    defaultValue={promptTone}
+                    style={{ width: 80 }}
+                    onChange={(value: any) => {
+                      localStore.set(PROMPT_TONE, value);
+                      forceUpdate();
+                      keepOneAudio(require(`../../assets/sound/${value}`));
+                    }}
+                  >
+                    <Option value="normal.mp3">normal</Option>
+                    <Option value="e.mp3">e</Option>
+                    <Option value="mega.mp3">mega</Option>
+                    <Option value="rikka.mp3">rikka</Option>
+                    <Option value="saigao.mp3">saigao</Option>
+                  </Select>
+                </span>
+              }
               other={
                 <Switch
                   size="small"
+                  disabled={!isNotificationSound}
                   onClick={() => {
-                    console.log(1111);
+                    localStore.set(IS_PROMPT_TONE, !isPromptTone);
+                    forceUpdate();
                   }}
-                  checked={true}
+                  checked={isPromptTone}
                 />
               }
             />
           </List>
-          <h3 style={{ margin: '16px 0' }}>消息通知</h3>
+          {/* 软件版本 */}
+          <h3 style={{ margin: '16px 0' }}>软件版本</h3>
           <List>
+            <ListItem prefixBlock="版本号" other={<span>{pkg.version}</span>} />
             <ListItem
               prefixBlock="自动更新"
               other={
                 <Switch
                   size="small"
                   onClick={() => {
-                    console.log(111);
+                    localStore.set(PROMPT_TONE, !isAutoUpdate);
+                    forceUpdate();
                   }}
-                  checked={true}
+                  checked={isAutoUpdate}
                 />
               }
             />
             <ListItem
-              prefixBlock="番剧更新提醒"
+              prefixBlock="检查更新"
               other={
-                <Switch
+                <Button
+                  type="primary"
                   size="small"
                   onClick={() => {
-                    console.log(111);
+                    ipcRenderer.send('check-update');
                   }}
-                  checked={true}
-                />
+                >
+                  检查
+                </Button>
               }
             />
           </List>
@@ -220,7 +276,7 @@ const Setting: FC = function() {
                 localStore.clear();
                 initStore();
                 notification.open({
-                  message: '',
+                  message: '信息',
                   description: '设置已重置'
                 });
                 forceUpdate();

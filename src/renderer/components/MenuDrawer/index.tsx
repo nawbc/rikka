@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { FilePosition } from './FilePosition';
 import { RIcon } from '@/components';
 import { OtherDownloadOptions } from './OtherDownloadOptions';
-import { localStore, initStore, randomAudio } from '@/utils';
+import { localStore, initStore, keepOneAudio } from '@/utils';
 import ClickDown from '../ClickDown';
 import './index.css';
 
@@ -57,12 +57,16 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
           mode="inline"
         >
           {/* 下载 */}
-          <Menu.Item key="1">
+          <Menu.Item key="download">
             <NavLink to="/download">下载</NavLink>
           </Menu.Item>
           {/* 关于 */}
-          <Menu.Item key="2">
+          <Menu.Item key="about">
             <NavLink to="/about">关于</NavLink>
+          </Menu.Item>
+          {/* 广告 */}
+          <Menu.Item key="ads">
+            <NavLink to="/ads">广告欣赏</NavLink>
           </Menu.Item>
           {/*设置*/}
           <SubMenu
@@ -74,7 +78,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
             }
           >
             <Menu.Item
-              key="3"
+              key="splash"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -92,7 +96,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
               />
             </Menu.Item>
             <Menu.Item
-              key="10"
+              key="theme-mode"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -117,7 +121,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                 </span>
               }
             >
-              <Menu.Item key="4">
+              <Menu.Item key="download-position">
                 <FilePosition
                   optionTitle="保存路径"
                   title="设置下载位置"
@@ -125,7 +129,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                   icon={<Icon type="cloud-download" />}
                 />
               </Menu.Item>
-              <Menu.Item key="5">
+              <Menu.Item key="speed">
                 <OtherDownloadOptions
                   visible={downVisible}
                   onOpen={() => {
@@ -137,7 +141,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
                 />
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="8">
+            <Menu.Item key="all-setting">
               <NavLink to="/setting">全部设置</NavLink>
             </Menu.Item>
           </SubMenu>
@@ -146,11 +150,11 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
           src={require('../../assets/rikkia.svg')}
           className="rikka-logo"
           onClick={() => {
-            randomAudio([
+            keepOneAudio([
               require('../../assets/sound/e.mp3'),
               require('../../assets/sound/mega.mp3'),
               require('../../assets/sound/rikka.mp3'),
-              require('../../assets/sound/saogao.mp3')
+              require('../../assets/sound/saigao.mp3')
             ]);
           }}
           style={{

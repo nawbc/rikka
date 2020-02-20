@@ -42,10 +42,6 @@
   border-radius: unset;
 }
 
-.ant-btn:active,
-.ant-btn.active {
-}
-
 /* input */
 
 .ant-input {
@@ -80,7 +76,7 @@
 }
 
 .ant-slider-handle:focus {
-  border-color: var(--pd) d7;
+  border-color: var(--pd);
 }
 
 .ant-slider-track {
@@ -88,11 +84,11 @@
 }
 
 .ant-slider:hover .ant-slider-track {
-  background-color: var(--pd) d7;
+  background-color: var(--pd);
 }
 
 .ant-slider-handle.ant-tooltip-open {
-  border-color: var(--pd) d7;
+  border-color: var(--pd);
 }
 
 /* tooltips */
@@ -136,10 +132,6 @@
   background-color: unset;
 }
 
-/* .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box span {
-  color: var(--pb);
-} */
-
 .ant-input-group > .ant-input:first-child,
 .ant-input-group-addon:first-child {
   background: rgba(255, 255, 255, 0.226);
@@ -160,7 +152,11 @@
 }
 
 .ant-notification-notice-message {
-  display: none;
+  font: 15px;
+}
+
+.ant-notification-notice-description {
+  font-size: 11px;
 }
 
 .ant-notification-notice.ant-notification-notice-closable {
@@ -175,7 +171,11 @@
 
 .ant-notification {
   width: 265px;
+  z-index: 100001;
 }
+/**=================================================================================================
+ *			LASTMODIFY --- 2020-02-19T12:16:42.797Z
+ *=================================================================================================*/
 
 .ant-select-auto-complete.ant-select .ant-input {
   height: 34px;
@@ -217,4 +217,15 @@
 
 .ant-select-auto-complete.ant-select .ant-select-selection--single {
   background-color: transparent;
+}
+
+.ant-drawer-mask {
+  background-color: unset;
+}
+
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+  border-right: unset;
 }
