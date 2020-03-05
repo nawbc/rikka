@@ -43,7 +43,7 @@ const Play: FC<any> = function(props) {
     pathname: `/${type}/${id}/`
   });
 
-  // useTitle(name);
+  useTitle(name);
 
   const currentVideo = useMemo(async () => {
     return new VideoApi(introUrl + '1.html', type).init();

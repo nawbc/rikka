@@ -4,12 +4,13 @@ import { Card, FilterNav, Foot, ScrollBar } from '@/components';
 import { createMovie, Areas, Years, MovieKind } from '@/api/halihali';
 import { VideoListData } from '@/api/halihali/halihali.interface';
 import { Pagination } from 'antd';
+import { useModifyJumperContentText } from '@/utils';
 
 export const Movie: FC = function() {
   const [cards, setCards] = useState<VideoListData[]>([]);
   const [page, setPage] = useState(1);
   const [year, setYear] = useState(Years['全部']);
-  const [area, setArea] = useState(Areas['日本']);
+  const [area, setArea] = useState(Areas['全部']);
   const [kind, setKind] = useState(MovieKind['全部']);
 
   useEffect(() => {
@@ -56,26 +57,39 @@ export const Movie: FC = function() {
                   <Card
                     key={index}
                     imgSrc={val.thumbUrl}
-                    url={val.url}
+                    url={'/play' + val.url + val.title}
                     videoName={val.title}
                     subTitle={val.episode}
                     style={{ margin: '50px 15px 0 15px' }}
                     onImgLoadError={e => {
                       const errorTarget = e.target as HTMLImageElement;
-                      errorTarget.src = require('../../../../assets/error_img.jpg');
+                      errorTarget.src = require('../../../../assets/image/error_img.jpg');
                     }}
                   />
                 );
               })
             : null}
         </div>
-        <Pagination
-          defaultCurrent={1}
-          total={3240}
-          onChange={(num: number) => {
-            setPage(num);
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: 70
           }}
-        />
+        >
+          <Pagination
+            style={{
+              display: 'inline'
+            }}
+            showQuickJumper
+            defaultCurrent={1}
+            total={3240}
+            onChange={(num: number) => {
+              setPage(num);
+            }}
+          />
+        </div>
         <Foot />
       </div>
     </ScrollBar>

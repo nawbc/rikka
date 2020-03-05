@@ -16,5 +16,7 @@ export { default as Loading } from './Loading';
 export { default as DragAppBar } from './DragAppBar';
 export { default as UpdateList } from './UpdateList';
 export { default as Center } from './Center';
+export { default as CompanyMarquee } from './CompanyMarquee';
+export { default as Avatar } from './Avatar';
 export * from './ElectronLink';
-export * from './List';
+export * from './SettingList';

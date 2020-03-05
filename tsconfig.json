@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2018", //optional chain 不能用esnext
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,10 +20,17 @@
     "jsx": "react",
     "sourceMap": false,
     "baseUrl": ".",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
-      "@/*": ["src/renderer/*"]
+      "@/*": [
+        "src/renderer/*"
+      ]
     }
   },
-  "include": ["src/**/*", "test/**/*"]
+  "include": [
+    "src/**/*",
+    "test/**/*"
+  ]
 }

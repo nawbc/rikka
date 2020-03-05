@@ -4,7 +4,7 @@ import * as urlLib from 'url';
 import { get } from 'request-promise-native';
 import { HaliHaliCode } from './constants';
 import delay from 'delay';
-import { setHeaders, transformIntroduce } from './utils';
+import { setHeaders } from './utils';
 import * as path from 'path';
 
 interface InitScriptsContent {
@@ -259,7 +259,6 @@ export class VideoApi {
       throw new Error(`Error[${HaliHaliCode.PARSE_ERROR}]` + err);
     });
     this.collections = await this.handle_init_scripts_content(scripts);
-    console.log(this.collections);
     return this;
   }
 

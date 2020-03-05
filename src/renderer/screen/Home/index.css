@@ -26,5 +26,42 @@
   width: 100%;
   z-index: 999;
   backdrop-filter: saturate(180%) blur(20px);
-  background: rgba(255, 255, 255, 0.226);
+  background: var(--pn);
+}
+
+.main-tabs .ant-pagination-prev .ant-pagination-item-link,
+.main-tabs .ant-pagination-next .ant-pagination-item-link {
+  border: unset;
+  border-radius: unset;
+}
+
+.main-tabs .ant-pagination-item {
+  border: unset;
+  border-radius: unset;
+}
+
+.main-tabs .ant-pagination-options-quick-jumper input {
+  padding: unset;
+  padding-left: 2px;
+  height: 22px;
+  width: 30px;
+  border-radius: unset;
+}
+
+.main-tabs .ant-pagination-item-active a,
+.main-tabs .ant-pagination-item-active:focus a,
+.main-tabs .ant-pagination-item-active:hover a {
+  color: var(--ppf);
+}
+
+.main-tabs .ant-pagination-item:focus,
+.main-tabs .ant-pagination-item:hover,
+.main-tabs .ant-pagination-item:focus a,
+.main-tabs .ant-pagination-item:hover a {
+  color: var(--ppf);
+}
+
+.main-tabs .ant-pagination-options-quick-jumper input:focus {
+  border-color: var(--antd-wave-shadow-color);
+  box-shadow: 0 0 3px var(--antd-wave-shadow-color-light);
 }

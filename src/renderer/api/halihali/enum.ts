@@ -1,6 +1,7 @@
 export const Areas = {
   全部: 'all',
   日本: 'japan',
+  中国: 'china',
   英国: 'england',
   美国: 'american',
   韩国: 'korea'
@@ -38,6 +39,7 @@ export const ComicKind = {
 
 export const Years = {
   全部: 0,
+  '2020': 2020,
   '2019': 2019,
   '2018': 2018,
   '2017': 2017,

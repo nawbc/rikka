@@ -59,7 +59,7 @@
 
 .collection-mask {
   z-index: 900;
-  backdrop-filter: blur(5px);
+  backdrop-filter: saturate(180%) blur(5px);
   background: #0000003a;
 }
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Avatar, Row, Col, Modal } from 'antd';
-import { RIcon, ScrollBar, ListItem, ElectronLink, List, ClickDown } from '@/components';
+import { RIcon, ScrollBar, ListItem, ElectronLink, SettingList, ClickDown } from '@/components';
 import { useWindowResize, useTitle } from '@/utils';
 import Package from '../../../../package.json';
 import './index.css';
@@ -22,7 +22,7 @@ const Item: FC<any> = function(props) {
   );
 };
 
-export const About: FC = function(props) {
+const About: FC = function(props) {
   const { width, height } = useWindowResize();
   useTitle('关于');
   return (
@@ -36,7 +36,11 @@ export const About: FC = function(props) {
         <div style={{ maxWidth: '600px', margin: '60px auto' }}>
           <Row style={{ background: '#eee', padding: '10px 20px', borderRadius: 5 }}>
             <Col span={6}>
-              <Avatar shape="circle" size={100} src={require('../../assets/pay/profile.jpg')} />
+              <Avatar
+                shape="circle"
+                size={100}
+                src={require('../../assets/image/pay/profile.jpg')}
+              />
             </Col>
             <Col span={18} style={{ fontSize: 16 }}>
               <div
@@ -50,7 +54,7 @@ export const About: FC = function(props) {
               >
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/user-line.svg')} size={[20, 20]} />
+                    <RIcon src={require('../../assets/image/icon/user-line.svg')} size={[20, 20]} />
                     &nbsp;&nbsp;
                     <span>作者</span>
                   </div>
@@ -58,7 +62,7 @@ export const About: FC = function(props) {
                 </Item>
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/qq.svg')} size={[20, 20]} />
+                    <RIcon src={require('../../assets/image/icon/qq.svg')} size={[20, 20]} />
                     &nbsp;&nbsp;
                     <span>QQ</span>
                   </div>
@@ -66,7 +70,7 @@ export const About: FC = function(props) {
                 </Item>
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/mail-line.svg')} size={[20, 20]} />
+                    <RIcon src={require('../../assets/image/icon/mail-line.svg')} size={[20, 20]} />
                     &nbsp;&nbsp;
                     <span>邮箱</span>
                   </div>
@@ -76,7 +80,7 @@ export const About: FC = function(props) {
                 </Item>
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/github.svg')} size={[20, 20]} />
+                    <RIcon src={require('../../assets/image/icon/github.svg')} size={[20, 20]} />
                     &nbsp;&nbsp;
                     <span>Github</span>
                   </div>
@@ -86,7 +90,10 @@ export const About: FC = function(props) {
                 </Item>
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/calculator-line.svg')} size={[20, 20]} />
+                    <RIcon
+                      src={require('../../assets/image/icon/calculator-line.svg')}
+                      size={[20, 20]}
+                    />
                     &nbsp;&nbsp;
                     <span>软件名</span>
                   </div>
@@ -94,7 +101,10 @@ export const About: FC = function(props) {
                 </Item>
                 <Item>
                   <div>
-                    <RIcon src={require('../../assets/award-line.svg')} size={[20, 20]} />
+                    <RIcon
+                      src={require('../../assets/image/icon/award-line.svg')}
+                      size={[20, 20]}
+                    />
                     &nbsp;&nbsp;
                     <span>开源协议</span>
                   </div>
@@ -103,7 +113,7 @@ export const About: FC = function(props) {
               </div>
             </Col>
           </Row>
-          <List>
+          <SettingList>
             {/* <ElectronLink href={pkg.config.qq_group_link}> */}
             <ListItem
               prefixBlock="加入qq群 (bug 反馈, 划水)"
@@ -129,14 +139,14 @@ export const About: FC = function(props) {
                   <span>{pkg.config.qq_group}</span>&nbsp;&nbsp;
                   <ClickDown>
                     <RIcon
-                      src={require('../../assets/qr.svg')}
+                      src={require('../../assets/image/icon/qr.svg')}
                       size={[16, 16]}
                       onClick={() => {
                         Modal.confirm({
                           title: <h3>二维码</h3>,
                           content: (
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                              <img src={require('../../assets/pay/qq_qr.png')} />
+                              <img src={require('../../assets/image/qq_qr.png')} />
                             </div>
                           ),
                           okText: '关闭',
@@ -149,18 +159,18 @@ export const About: FC = function(props) {
                 </div>
               }
             />
-          </List>
+          </SettingList>
           <br />
           <br />
           <h3>捐赠</h3>
           <br />
           <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
             <img
-              src={require('../../assets/pay/alipay.jpg')}
+              src={require('../../assets/image/pay/alipay.jpg')}
               style={{ width: 260, padding: '10px', background: '#eee', borderRadius: '10px' }}
             />
             <img
-              src={require('../../assets/pay/wechat.jpg')}
+              src={require('../../assets/image/pay/wechat.jpg')}
               style={{ width: 260, padding: '10px', background: '#eee', borderRadius: '10px' }}
             />
           </div>
@@ -169,3 +179,5 @@ export const About: FC = function(props) {
     </div>
   );
 };
+
+export default About;

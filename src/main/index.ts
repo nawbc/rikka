@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'development') {
 let mainWindow: BrowserWindow | null;
 let tray: Tray;
 const execProgramName = basename(process.execPath);
-const updateUrl = process.env.NODE_ENV === 'development' ? 'http://localhost' : '';
+const updateUrl = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'http://localhost';
 
 const setAutoLogin = (isAuto = false) => {
   app.setLoginItemSettings({
@@ -37,6 +37,7 @@ function createWindow() {
     width: 1200,
     useContentSize: true,
     frame: false,
+    transparent: true,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false
@@ -72,15 +73,19 @@ function createWindow() {
     setAutoLogin(false);
   });
 
+  ipcMain.on('devtool', () => {
+    mainWindow!.webContents.openDevTools();
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
   mainWindow.on('close', (event: any) => {
+    event.preventDefault();
     mainWindow!.hide();
     // 不在任务栏显示
     mainWindow!.setSkipTaskbar(true);
-    event.preventDefault();
   });
 
   // 检查自动更新

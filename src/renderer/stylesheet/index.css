@@ -1,5 +1,6 @@
 @import '~antd/dist/antd.css';
 @import '~dplayer/dist/DPlayer.min.css';
+@import '~cropperjs/dist/cropper.css';
 @import 'customAntdTheme.css';
 @import 'item.css';
 
@@ -14,10 +15,14 @@ body {
   --pl: #2a2e96;
   --pll: #31459a;
   --pp: #4857a4;
+  --ppf: #002aff;
+  --pn: #ffffff3a;
   --pb: #1d2087;
   --gg: #afafaf;
+  --gl: #e6e6e6;
   --bl: #000000db;
   --bd: #000;
   --bll: #333333de;
   --antd-wave-shadow-color: #5168ce;
+  --antd-wave-shadow-color-light: #4e68dac4;
 }

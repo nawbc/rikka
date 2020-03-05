@@ -4,10 +4,10 @@
  */
 
 import React, { FC, useState, useRef } from 'react';
-import { useWindowResize, is } from '@/utils';
-import { RIcon } from '@/components';
 import AV from 'leancloud-storage';
+import { RIcon } from '@/components';
 import { notification } from 'antd';
+import { is } from '@/utils';
 import './unsigned.css';
 
 interface UnsignedProp {
@@ -72,6 +72,24 @@ const register = (email: string, passwd: string, username: string, ref?: any) =>
       });
     }
   );
+};
+
+const login = (email: string, passwd: string, callback: (user: AV.User) => void) => {
+  AV.User.loginWithEmail(email, passwd)
+    .then(user => {
+      is.function(callback) && callback(user);
+      notification.open({
+        message: '信息',
+        description: '登陆成功'
+      });
+    })
+    .catch(error => {
+      notification.open({
+        message: '注意',
+        description: error.toString(),
+        duration: 2
+      });
+    });
 };
 
 export const UnSigned: FC<UnsignedProp> = function(props) {
@@ -140,7 +158,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                   });
                 }}
               >
-                <RIcon src={require('../../../../assets/qq.svg')} size={[17, 17]} />
+                <RIcon src={require('../../../../assets/image/icon/qq.svg')} size={[17, 17]} />
               </a>
               <a
                 href="javascript:void(0)"
@@ -151,7 +169,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                   });
                 }}
               >
-                <RIcon src={require('../../../../assets/alipay.svg')} size={[17, 17]} />
+                <RIcon src={require('../../../../assets/image/icon/alipay.svg')} size={[17, 17]} />
               </a>
               <a
                 href="javascript:void(0)"
@@ -162,7 +180,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
                   });
                 }}
               >
-                <RIcon src={require('../../../../assets/github.svg')} size={[17, 17]} />
+                <RIcon src={require('../../../../assets/image/icon/github.svg')} size={[17, 17]} />
               </a>
             </div>
             <br />
@@ -188,21 +206,7 @@ export const UnSigned: FC<UnsignedProp> = function(props) {
               onClick={e => {
                 e.preventDefault();
                 if (localCheckSuitable(email, passwd)) {
-                  AV.User.loginWithEmail(email, passwd)
-                    .then(user => {
-                      is.function(onLogin) && onLogin(user);
-                      notification.open({
-                        message: '信息',
-                        description: '登陆成功'
-                      });
-                    })
-                    .catch(error => {
-                      notification.open({
-                        message: '',
-                        description: '检查邮箱验证啊 哥' + error.toString(),
-                        duration: 2
-                      });
-                    });
+                  login(email, passwd, onLogin);
                 }
               }}
             >

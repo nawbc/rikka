@@ -21,7 +21,7 @@ const dataToEleList = (data: SearchListData[]) =>
         >
           {item.title}
         </span>
-        <RIcon size={[16, 16]} src={require('../../assets/play.svg')} />
+        <RIcon size={[16, 16]} src={require('../../assets/image/icon/play.svg')} />
       </div>
     </Option>
   ));
@@ -54,7 +54,7 @@ const Search: FC<any> = function(props) {
           }}
         >
           <RIcon
-            src={require('../../assets/search.svg')}
+            src={require('../../assets/image/icon/search.svg')}
             size={[18, 18]}
             style={{
               transform: 'translate(0px, 2px)'

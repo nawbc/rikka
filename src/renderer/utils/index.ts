@@ -62,6 +62,10 @@ export const isNotIndexPage = () => /\/result|\/play|\/download|\/setting/.test(
 export const randomNumber = (min: number, max: number): number =>
   min + Math.floor(Math.random() * (max - min)) + 1;
 
+export const randomColor = (arr: string[]) => {
+  return arr[randomNumber(0, arr.length - 1)];
+};
+
 let audioCanPlay = true;
 export const keepOneAudio = (sound: string[] | string) => {
   if (audioCanPlay) {

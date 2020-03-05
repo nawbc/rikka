@@ -2,7 +2,6 @@ import React, { FC, useState, useReducer, HTMLAttributes } from 'react';
 import { Areas, Years } from '@/api/halihali';
 import { Row, Col, Drawer } from 'antd';
 import { ClickDown } from '../';
-import { RequestHaliHali } from '@/api/halihali/halihali.interface';
 import { ComicKind, MovieKind, SeriesKind } from '@/api/halihali/enum';
 import './index.css';
 

@@ -1,0 +1,13 @@
+.avatar-container:hover .avatar-mask {
+  transform: scale(1);
+}
+
+.avatar-mask {
+  backdrop-filter: saturate(180%) blur(2px);
+  transition: transform 300ms ease;
+  background: rgba(163, 163, 163, 0.308);
+  transform: scale(0);
+  will-change: transform;
+  line-height: 100px;
+  text-align: center;
+}

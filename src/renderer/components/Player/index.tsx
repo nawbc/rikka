@@ -30,6 +30,7 @@ const Player: FC<PlayerOptions> = function(props) {
     };
     return div;
   };
+  
   useEffect(() => {
     const playerWrapper = (wrapper.current as unknown) as HTMLDivElement;
     try {

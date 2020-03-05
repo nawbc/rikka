@@ -219,13 +219,19 @@
   background-color: transparent;
 }
 
-.ant-drawer-mask {
-  background-color: unset;
-}
-
 .ant-menu-vertical .ant-menu-item::after,
 .ant-menu-vertical-left .ant-menu-item::after,
 .ant-menu-vertical-right .ant-menu-item::after,
 .ant-menu-inline .ant-menu-item::after {
   border-right: unset;
+}
+
+.ant-tooltip .ant-tooltip-inner {
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(90, 90, 90, 0.3);
+}
+
+.ant-tooltip .ant-tooltip-arrow::before {
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(90, 90, 90, 0.3);
 }

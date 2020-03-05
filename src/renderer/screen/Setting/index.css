@@ -32,3 +32,9 @@
   background-color: #afafaf;
   box-shadow: 0 2px 25px #6d6d6dd9;
 }
+
+.list .ant-select-selection {
+  border: unset;
+  background-color: unset;
+  border-radius: unset;
+}

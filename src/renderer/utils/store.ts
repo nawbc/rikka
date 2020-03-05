@@ -9,7 +9,7 @@ const schema: any = {
     properties: {
       themeMode: {
         type: 'string',
-        default: 'light'
+        default: 'holyLight'
       },
       dayNightMode: {
         type: 'boolean',
@@ -48,7 +48,11 @@ const schema: any = {
         type: 'string',
         default: 'bar'
       },
-      isExitDirectly: {
+      exitMode: {
+        type: 'string',
+        default: 'ask' // ask exit tray
+      },
+      isRememberExit: {
         type: 'boolean',
         default: false
       },
@@ -72,18 +76,18 @@ const schema: any = {
         type: 'boolean',
         default: false
       },
-      isPromptUpdate: {
-        type: 'boolean',
-        default: true
+      origin: {
+        type: 'string',
+        default: 'halihali'
       }
     }
   },
   user: {
     type: 'object',
     properties: {
-      isSigned: {
-        type: 'boolean',
-        default: false
+      avatar: {
+        type: 'string',
+        default: ''
       },
       history: {
         type: 'array',
@@ -101,7 +105,7 @@ const schema: any = {
   }
 };
 
-export const localStore = new Store({ schema });
+export const localStore = new Store({ name: 'rikka-config', schema });
 
 export const initStore = () => {
   for (const prop in schema) {

@@ -13,10 +13,12 @@ import {
   IS_PROMPT_TONE,
   PROMPT_TONE,
   IS_SPLASH,
-  IS_AUTOUPDATE
+  IS_AUTOUPDATE,
+  EXIT_MODE,
+  THEME_MODE
 } from '@/utils';
-import { notification, Switch, Radio, Tooltip, Select, Button } from 'antd';
-import { ScrollBar, MainButton, List, ListItem, RIcon, ClickDown } from '@/components';
+import { notification, Switch, Select, Button } from 'antd';
+import { ScrollBar, MainButton, SettingList, ListItem, RIcon, ClickDown } from '@/components';
 import { ipcRenderer, remote } from 'electron';
 import Package from '../../../../package.json';
 import './index.css';
@@ -24,6 +26,17 @@ import './index.css';
 const { dialog } = remote;
 const pkg = Package as any;
 const { Option } = Select;
+
+const switchModeVal = function(mode: string) {
+  switch (mode) {
+    case 'dayNight':
+      return '昼夜';
+    case 'holyLight':
+      return '圣光';
+    case 'darkFlame':
+      return '暗焰';
+  }
+};
 
 const Setting: FC = function() {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
@@ -37,6 +50,8 @@ const Setting: FC = function() {
   const promptTone = localStore.get(PROMPT_TONE);
   const isSplash = localStore.get(IS_SPLASH);
   const isAutoUpdate = localStore.get(IS_AUTOUPDATE);
+  const exitMode = localStore.get(EXIT_MODE);
+  const themeMode = localStore.get(THEME_MODE);
   const downloadRef = useRef<any>(null);
   const screenshotRef = useRef<any>(null);
 
@@ -48,7 +63,7 @@ const Setting: FC = function() {
         <div style={{ maxWidth: '600px', margin: '60px auto' }}>
           {/* 基本设置 */}
           <h3 style={{ marginBottom: 16 }}>基本设置</h3>
-          <List>
+          <SettingList>
             <ListItem
               prefixBlock="开机自爆(qi)"
               other={
@@ -90,7 +105,7 @@ const Setting: FC = function() {
               other={
                 <ClickDown>
                   <RIcon
-                    src={require('../../assets/dir.svg')}
+                    src={require('../../assets/image/icon/dir.svg')}
                     size={[18, 18]}
                     style={{ marginRight: 4 }}
                     onClick={() => {
@@ -114,10 +129,19 @@ const Setting: FC = function() {
                 paddingRight: '3px'
               }}
               other={
-                <Radio.Group>
-                  <Radio value="1">退出</Radio>
-                  <Radio value="2">托盘</Radio>
-                </Radio.Group>
+                <Select
+                  size="small"
+                  defaultValue={exitMode}
+                  style={{ width: 80 }}
+                  onChange={(value: any) => {
+                    localStore.set(EXIT_MODE, value);
+                    forceUpdate();
+                  }}
+                >
+                  <Option value="ask">询问</Option>
+                  <Option value="exit">退出</Option>
+                  <Option value="tray">托盘</Option>
+                </Select>
               }
             />
             <ListItem
@@ -126,18 +150,31 @@ const Setting: FC = function() {
                 paddingRight: '3px'
               }}
               other={
-                <Radio.Group>
-                  <Tooltip title="根据时间自动切换 ">
-                    <Radio value="1">昼夜</Radio>
-                  </Tooltip>
-                  <Radio value="2">圣光</Radio>
-                  <Radio value="3">暗焰</Radio>
-                </Radio.Group>
+                <Select
+                  size="small"
+                  defaultValue={switchModeVal(themeMode)}
+                  style={{ width: 80 }}
+                  onChange={(value: any) => {
+                    localStore.set(THEME_MODE, value);
+                    forceUpdate();
+                  }}
+                >
+                  <Option value="dayNight">昼夜</Option>
+                  <Option value="holyNight">圣光</Option>
+                  <Option value="darkFlame">暗焰</Option>
+                </Select>
+                // <Radio.Group>
+                //   <Tooltip title="根据时间自动切换 ">
+                //     <Radio value="1">昼夜</Radio>
+                //   </Tooltip>
+                //   <Radio value="2">圣光</Radio>
+                //   <Radio value="3">暗焰</Radio>
+                // </Radio.Group>
               }
             />
-          </List>
+          </SettingList>
           <h3 style={{ margin: '16px 0' }}>下载设置</h3>
-          <List>
+          <SettingList>
             <ListItem
               prefixBlock={
                 <>
@@ -150,7 +187,7 @@ const Setting: FC = function() {
               other={
                 <ClickDown>
                   <RIcon
-                    src={require('../../assets/dir.svg')}
+                    src={require('../../assets/image/icon/dir.svg')}
                     size={[18, 18]}
                     style={{ marginRight: '4px' }}
                     onClick={() => {
@@ -168,10 +205,10 @@ const Setting: FC = function() {
                 </ClickDown>
               }
             />
-          </List>
+          </SettingList>
           {/* 消息通知 */}
           <h3 style={{ margin: '16px 0' }}>消息通知</h3>
-          <List>
+          <SettingList>
             <ListItem
               prefixBlock="消息通知"
               other={
@@ -236,10 +273,10 @@ const Setting: FC = function() {
                 />
               }
             />
-          </List>
+          </SettingList>
           {/* 软件版本 */}
           <h3 style={{ margin: '16px 0' }}>软件版本</h3>
-          <List>
+          <SettingList>
             <ListItem prefixBlock="版本号" other={<span>{pkg.version}</span>} />
             <ListItem
               prefixBlock="自动更新"
@@ -247,7 +284,7 @@ const Setting: FC = function() {
                 <Switch
                   size="small"
                   onClick={() => {
-                    localStore.set(PROMPT_TONE, !isAutoUpdate);
+                    localStore.set(IS_AUTOUPDATE, !isAutoUpdate);
                     forceUpdate();
                   }}
                   checked={isAutoUpdate}
@@ -268,7 +305,7 @@ const Setting: FC = function() {
                 </Button>
               }
             />
-          </List>
+          </SettingList>
           <p>
             <MainButton
               className="rect reset-button"

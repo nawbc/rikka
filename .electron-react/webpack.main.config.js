@@ -25,7 +25,17 @@ let mainConfig = {
   module: {
     rules: [
       {
-        test: /\.(js|ts)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
+      {
+        test: /\.(js|ts|tsx)$/,
         loader: 'ts-loader',
         options: {
           transpileOnly: true,

@@ -3,6 +3,7 @@
   margin: 0 0 5px 0 !important;
   padding: 8px 14px !important;
 }
+
 .update-table.ant-tabs .ant-tabs-left-bar .ant-tabs-nav-container,
 .ant-tabs .ant-tabs-right-bar .ant-tabs-nav-container,
 .ant-tabs .ant-tabs-left-bar .ant-tabs-nav-wrap,
@@ -16,4 +17,17 @@
 
 .update-table .ant-tabs-right-content {
   padding: unset !important;
+}
+
+.update-table .ant-list-item {
+  padding: 10px 0;
+}
+
+.update-table .ant-list-item-meta-title > a:hover {
+  color: var(--pd);
+}
+
+.main-tabs .update-table .ant-tabs-nav-container {
+  background: transparent !important;
+  backdrop-filter: unset;
 }

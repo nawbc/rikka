@@ -1,11 +1,9 @@
 import Home from '@/screen/Home';
-// import Series from "@/screen/Home/Fragment/Series";
-// import Movie from "@/screen/Home/Fragment/Movie";
 import Download from '@/screen/Download';
 import Setting from '@/screen/Setting';
-// import SearchResult from '@/screen/SearchResult';
 import Play from '@/screen/Play';
-import { About } from '@/screen/About';
+import About from '@/screen/About';
+import CompanyResult from '@/screen/CompanyResult';
 import Ads from '@/screen/Ads';
 
 export const routes: any[] = [
@@ -22,11 +20,13 @@ export const routes: any[] = [
   },
   {
     path: '/play/:type/:id/:name',
-    component: Play
+    component: Play,
+    exact: true
   },
   {
-    path: '/result',
-    component: About
+    path: '/companyresult/:name',
+    component: CompanyResult,
+    exact: true
   },
   {
     path: '/about',
@@ -35,8 +35,7 @@ export const routes: any[] = [
   {
     path: '/setting',
     component: Setting,
-    exact: true,
-    cache: true
+    exact: true
   },
   {
     path: '/ads',

@@ -44,7 +44,6 @@ export function handleUpdate(window: BrowserWindow | null, updateUrl: string) {
   });
 
   autoUpdater.on('download-progress', progress => {
-    console.log(111111);
     sendMsg(window, {
       event: 'download-progress',
       message: progress

@@ -22,8 +22,9 @@
   bottom: 0;
   transform: translateY(60%);
   backdrop-filter: saturate(180%) blur(5px);
+  background-color: rgba(90, 90, 90, 0.3);
   transition: transform 300ms ease;
-  background: rgba(163, 163, 163, 0.308);
+  will-change: transform;
 }
 
 .card .data * {

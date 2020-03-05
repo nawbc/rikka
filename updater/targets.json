@@ -1,0 +1,193 @@
+{
+  "bone": {
+    "name": "骨头社",
+    "iconPath": "bone.jpg",
+    "iconSize": [
+      113,
+      50
+    ],
+    "search": [
+      "钢之炼金术师",
+      "野良神",
+      "黑之契约者",
+      "交响诗篇"
+    ]
+  },
+  "kyotoAnimation": {
+    "name": "京阿尼",
+    "iconPath": "kyotoAnimation.png",
+    "iconSize": [
+      250,
+      50
+    ],
+    "search": [
+      "ClANNAD",
+      "AIR/青空",
+      "中二病也要谈恋爱",
+      "冰菓",
+      "境界的彼方",
+      "KANON"
+    ]
+  },
+  "wit": {
+    "name": "wit",
+    "iconPath": "wit.jpg",
+    "iconSize": [
+      100,
+      50
+    ],
+    "search": [
+      "罪恶王冠",
+      "黑子的篮球",
+      "进击的巨人",
+      "黑子的篮球"
+    ]
+  },
+  "ufotable": {
+    "name": "飞碟社",
+    "iconPath": "ufotable.jpg",
+    "iconSize": [
+      150,
+      50
+    ],
+    "search": [
+      "Fate/",
+      "噬神者"
+    ]
+  },
+  "dogakobo": {
+    "name": "动画工房",
+    "iconPath": "dogakobo.png",
+    "iconSize": [
+      129,
+      50
+    ],
+    "search": [
+      "月刊少女野崎君",
+      "可塑性记忆",
+      "干物妹小埋",
+      "珈百璃的堕落"
+    ]
+  },
+  "pierrot": {
+    "name": "小丑社",
+    "iconPath": "pierrot.png",
+    "iconSize": [
+      50,
+      50
+    ],
+    "search": [
+      "火影忍者",
+      "东京食尸鬼",
+      "十二国记"
+    ]
+  },
+  "sunrise": {
+    "name": "日升动画",
+    "iconPath": "sunrise.png",
+    "iconSize": [
+      105,
+      50
+    ],
+    "search": [
+      "奥特曼",
+      "机动战士高达",
+      "犬夜叉",
+      "叛逆的鲁鲁修",
+      "加速世界"
+    ]
+  },
+  "coMixWaveFilms": {
+    "name": "CoMix Wave Films",
+    "iconPath": "coMixWaveFilms.svg",
+    "iconSize": [
+      112,
+      50
+    ],
+    "search": [
+      "秒速5厘米",
+      "追逐繁星的孩子",
+      "言叶之庭",
+      "你的名字"
+    ]
+  },
+  "Manga": {
+    "name": "芳文社",
+    "iconPath": "Manga.gif",
+    "iconSize": [
+      147,
+      50
+    ],
+    "search": [
+      "魔法少女小圆",
+      "轻音少女"
+    ]
+  },
+  "aniplex": {
+    "name": "aniplex",
+    "iconPath": "aniplex.gif",
+    "iconSize": [
+      141,
+      50
+    ],
+    "search": [
+      "四月是你的谎言",
+      "未闻花名",
+      "刀剑神域"
+    ]
+  },
+  "ghibli": {
+    "name": "吉卜力工作室",
+    "iconPath": "ghibli.png",
+    "iconSize": [
+      50,
+      50
+    ],
+    "search": [
+      "风之谷",
+      "天空之城",
+      "龙猫",
+      "萤火虫之墓",
+      "红猪",
+      "幽灵公主",
+      "千与千寻的神隐"
+    ]
+  },
+  "toei": {
+    "name": "东映动画",
+    "iconPath": "toei.gif",
+    "iconSize": [
+      352,
+      50
+    ],
+    "search": [
+      "七龙珠",
+      "海贼王",
+      "光之美少女",
+      "圣斗士星矢",
+      "灌篮高手",
+      "游戏王",
+      "美少女战士",
+      "数码宝贝"
+    ]
+  },
+  "jc": {
+    "name": "节操社",
+    "iconPath": "jc.gif",
+    "iconSize": [
+      240,
+      50
+    ],
+    "search": [
+      "魔法禁书目录",
+      "灼眼的夏娜",
+      "科学超电磁炮",
+      "龙与虎",
+      "后街女孩",
+      "在地下城寻求邂逅是否搞错了什么",
+      "杀戮天使",
+      "樱花庄的宠物女孩",
+      "食梦者"
+    ]
+  }
+}

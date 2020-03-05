@@ -1,25 +1,15 @@
-import React, { FC, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { ipcRenderer } from 'electron';
-import { DragAppBar } from '@/components';
+import React, { FC } from 'react';
+import { ScrollBar } from '@/components';
 import { useTitle } from '@/utils';
 
-const SearchResult: FC = function() {
-  useEffect(() => {
-    ipcRenderer.on('message', (event, args) => {
-      console.log(args);
-    });
-  }, []);
+const SearchResult: FC<any> = function(props) {
+  const { match } = props;
 
-  useTitle('搜索');
+  useTitle('搜索结果');
 
   return (
     <div>
-      <DragAppBar
-        onClose={() => {
-          window.close();
-        }}
-      />
+      <ScrollBar>aaaa</ScrollBar>
     </div>
   );
 };

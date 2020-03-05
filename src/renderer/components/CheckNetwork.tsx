@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { useNetWork } from '@/utils';
+import { useNetwork } from '@/utils';
 
 // notification.config({
 //   duration: 2.5,
@@ -13,7 +13,7 @@ interface CheckNetwork {
 
 const CheckNetwork: FC<CheckNetwork> = function(props) {
   const { onDisconnect, onChargeNetwork } = props;
-  const network = useNetWork();
+  const network = useNetwork();
 
   useEffect(() => {
     if (network.isOnline) {

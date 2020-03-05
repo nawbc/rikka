@@ -1,23 +1,44 @@
 import React, { FC, useState, useReducer } from 'react';
-import { Menu, Drawer, Switch, Icon, notification } from 'antd';
+import { Menu, Drawer, Switch, Icon } from 'antd';
 import { NavLink } from 'react-router-dom';
-import { FilePosition } from './FilePosition';
+import { FilePosition } from '../Modal/FilePositionModal';
 import { RIcon } from '@/components';
 import { OtherDownloadOptions } from './OtherDownloadOptions';
-import { localStore, initStore, keepOneAudio } from '@/utils';
+import { localStore, keepOneAudio, IS_SPLASH, ORIGIN } from '@/utils';
 import ClickDown from '../ClickDown';
 import './index.css';
 
 const { SubMenu } = Menu;
 
-interface MenuDrawerProps {
-  onClose?: ((e: any) => void) | undefined;
-}
+const menuHasOptionStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+};
 
-const MenuDrawer: FC<MenuDrawerProps> = function(props) {
+const SwitchOriginIcon: FC<{ origin: string }> = function(props) {
+  const { origin } = props;
+  return localStore.get(ORIGIN) === origin ? (
+    <RIcon src={require('../../assets/image/icon/position.svg')} />
+  ) : null;
+};
+
+const singleSubMenu = function(key: string[], update: any) {
+  const last = key.slice(key.length - 1);
+
+  if (last.includes('downloadSetting')) {
+    last.push('setting');
+    update(last);
+  } else {
+    update(last);
+  }
+};
+
+const MenuDrawer: FC<any> = function() {
   const [display, setDisplay] = useState(false);
   const [downVisible, setDownVisible] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const [subKey, setSubKey] = useState<string[]>([]);
 
   return (
     <div>
@@ -36,7 +57,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
         }}
       >
         <ClickDown>
-          <RIcon size={[20, 20]} src={require('../../assets/menu.svg')} />
+          <RIcon size={[20, 20]} src={require('../../assets/image/icon/menu.svg')} />
         </ClickDown>
       </div>
       <Drawer
@@ -51,11 +72,37 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
       >
         <Menu
           style={{ width: '100%' }}
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
+          openKeys={subKey}
+          onOpenChange={key => singleSubMenu(key, setSubKey)}
           forceSubMenuRender
           mode="inline"
         >
+          {/* 源 */}
+          <SubMenu key="origin" title="选择源">
+            <Menu.Item
+              style={menuHasOptionStyle}
+              onClick={() => {
+                localStore.set(ORIGIN, 'halihali');
+                forceUpdate();
+              }}
+            >
+              <span>邪王真眼</span>
+              <SwitchOriginIcon origin="halihali" />
+            </Menu.Item>
+            <Menu.Item
+              style={menuHasOptionStyle}
+              onClick={() => {
+                localStore.set(ORIGIN, 'newworld');
+                forceUpdate();
+              }}
+            >
+              <span>雷神战锤</span>
+              <SwitchOriginIcon origin="newworld" />
+            </Menu.Item>
+            {/* <Menu.Item>Mori Summer</Menu.Item>
+            <Menu.Item>漆黑烈焰</Menu.Item> */}
+          </SubMenu>
+
           {/* 下载 */}
           <Menu.Item key="download">
             <NavLink to="/download">下载</NavLink>
@@ -69,40 +116,19 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
             <NavLink to="/ads">广告欣赏</NavLink>
           </Menu.Item>
           {/*设置*/}
-          <SubMenu
-            key="setting"
-            title={
-              <span>
-                <span>设置</span>
-              </span>
-            }
-          >
-            <Menu.Item
-              key="splash"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}
-            >
+          <SubMenu key="setting" title={<span>设置</span>}>
+            <Menu.Item key="splash" style={menuHasOptionStyle}>
               <span>启动页</span>
               <Switch
                 size="small"
                 onClick={() => {
-                  localStore.set('setting.splash', !localStore.get('setting.splash'));
+                  localStore.set(IS_SPLASH, !localStore.get(IS_SPLASH));
                   forceUpdate();
                 }}
-                checked={localStore.get('setting.splash')}
+                checked={localStore.get(IS_SPLASH)}
               />
             </Menu.Item>
-            <Menu.Item
-              key="theme-mode"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}
-            >
+            <Menu.Item key="theme-mode" style={menuHasOptionStyle}>
               <span>昼夜模式</span>
               <Switch
                 size="small"
@@ -147,7 +173,7 @@ const MenuDrawer: FC<MenuDrawerProps> = function(props) {
           </SubMenu>
         </Menu>
         <RIcon
-          src={require('../../assets/rikkia.svg')}
+          src={require('../../assets/image/icon/rikkia.svg')}
           className="rikka-logo"
           onClick={() => {
             keepOneAudio([

@@ -16,7 +16,7 @@ const HomeButton: FC<any> = function(props) {
       <NavLink to="/" draggable={false}>
         <MainButton className="home-button">
           <RIcon
-            src={require('../../assets/home.svg')}
+            src={require('../../assets/image/icon/home.svg')}
             size={[25, 25]}
             style={{
               transform: 'translate(-1px, 2px)'

@@ -18,10 +18,10 @@ const logoTransitionStyles: any = {
 };
 
 const launcherCovers = [
-  require('../assets/launcher1.jpg'),
-  require('../assets/launcher2.jpg'),
-  require('../assets/launcher3.jpg'),
-  require('../assets/launcher4.jpg')
+  require('../assets/image/launcher/launcher1.jpg'),
+  require('../assets/image/launcher/launcher2.jpg'),
+  require('../assets/image/launcher/launcher3.jpg'),
+  require('../assets/image/launcher/launcher4.jpg')
 ];
 
 export default (props: any) => {
@@ -41,7 +41,7 @@ export default (props: any) => {
                 style={{
                   width: '100%',
                   height: '100%',
-                  backgroundImage: `url(${require('../assets/bilibili-fill.svg')})`,
+                  backgroundImage: `url(${require('../assets/image/icon/bilibili-fill.svg')})`,
                   backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat',
                   ...logoTransitionStyles[state],

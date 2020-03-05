@@ -19,14 +19,13 @@ const Card: FC<CardProps> = function(props) {
       <img
         src={imgSrc}
         onError={e => {
-          console.log(e);
           !!onImgLoadError && onImgLoadError(e);
         }}
       />
       <div className="data">
         <div className="content">
           <p className="title">
-            <NavLink to={`play${url || ''}${videoName}`}>{videoName}</NavLink>
+            <NavLink to={!!url ? url : 'javascript::void(0)'}>{videoName}</NavLink> 
           </p>
           <span className="author">{subTitle || '不可视之境界'}</span>
           <p className="text">{desc}</p>

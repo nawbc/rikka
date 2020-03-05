@@ -7,13 +7,15 @@ import { Main } from './Fragment/Main';
 import { Movie } from './Fragment/Movie';
 import { User } from './Fragment/User';
 import { Series } from './Fragment/Series';
-import './index.css';
 import { CheckNetwork } from '@/components';
+import { useModifyJumperContentText } from '@/utils';
+import './index.css';
 
 const { TabPane } = Tabs;
 
 const Home = function() {
   const { width, height } = useWindowResize();
+  useModifyJumperContentText();
 
   return (
     <CheckNetwork
@@ -34,6 +36,7 @@ const Home = function() {
         defaultActiveKey="1"
         size="small"
         className="main-tabs"
+        // animated={false}
         onChange={activeKey => {
           switch (activeKey) {
             case '1':
@@ -57,17 +60,17 @@ const Home = function() {
         <TabPane tab="老大" key="1" style={{ width, height }} forceRender>
           <Main />
         </TabPane>
-        <TabPane tab="纸片" key="2" style={{ width, height }} forceRender>
+        <TabPane tab="吾王" key="2" style={{ width, height }} forceRender>
+          <User />
+        </TabPane>
+        <TabPane tab="纸片" key="3" style={{ width, height }} forceRender>
           <Comic />
         </TabPane>
-        <TabPane tab="幻境" key="3" style={{ width, height }} forceRender>
+        <TabPane tab="幻境" key="4" style={{ width, height }} forceRender>
           <Movie />
         </TabPane>
-        <TabPane tab="现实" key="4" style={{ width, height }} forceRender>
+        <TabPane tab="现实" key="5" style={{ width, height }} forceRender>
           <Series />
-        </TabPane>
-        <TabPane tab="吾王" key="5" style={{ width, height }} forceRender>
-          <User />
         </TabPane>
       </Tabs>
     </CheckNetwork>

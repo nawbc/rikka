@@ -1,14 +1,14 @@
-import React, { FC, useState, HTMLAttributes } from 'react';
+import React, { FC, useState, HTMLAttributes, useLayoutEffect } from 'react';
 import { ipcRenderer } from 'electron';
 import ClickDown from '../ClickDown';
 import { UpdateCollections } from '@/api/halihali/halihali.interface';
 import { Tabs, List } from 'antd';
 import { ScrollBar } from '..';
 import './index.css';
+import { createUpdateList } from '@/api/halihali';
+import { NavLink } from 'react-router-dom';
 
-interface UpdateLisProp extends HTMLAttributes<any> {
-  lists: UpdateCollections;
-}
+interface UpdateLisProp extends HTMLAttributes<any> {}
 
 const { TabPane } = Tabs;
 
@@ -32,12 +32,19 @@ const displayDay = (index: number) => {
 };
 
 const UpdateList: FC<UpdateLisProp> = function(props) {
-  const { lists, ...rest } = props;
   const today = new Date().getDay();
   const [pane, setPane] = useState(today.toString());
+  const [updateList, setUpdateList] = useState<UpdateCollections>([]);
+  const { style } = props;
+  const height = !!style ? style.height : null;
+  useLayoutEffect(() => {
+    createUpdateList().then(data => {
+      setUpdateList(data);
+    });
+  }, []);
 
   return (
-    <div {...rest}>
+    <div {...props}>
       <Tabs
         tabPosition="right"
         className="update-table"
@@ -46,19 +53,22 @@ const UpdateList: FC<UpdateLisProp> = function(props) {
           setPane(key);
         }}
       >
-        {lists.map((val, index) => {
+        {updateList.map((val, index) => {
           return (
             <TabPane tab={displayDay(index)} key={index.toString()} forceRender>
-              <ScrollBar style={{ height: 400 }}>
+              <ScrollBar style={{ height }}>
                 <List
-                  style={{ height: 300 }}
                   itemLayout="horizontal"
                   dataSource={val}
                   renderItem={item => {
                     return (
                       <List.Item>
                         <List.Item.Meta
-                          title={<a href="https://ant.design">{item.title}</a>}
+                          title={
+                            <NavLink to={`play${item.url.pathname || ''}${item.title}`}>
+                              {item.title}
+                            </NavLink>
+                          }
                           description={item.update}
                         />
                       </List.Item>
